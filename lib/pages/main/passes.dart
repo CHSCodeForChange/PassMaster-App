@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 import './passes/active-passes.dart';
 import './passes/pending-passes.dart';
 import './passes/old-passes.dart';
-import './passes/unapproved-passes.dart';
-import './passes/search-pass-list.dart';
 import '../../models/currentuser.dart';
 
 class Passes extends StatelessWidget {

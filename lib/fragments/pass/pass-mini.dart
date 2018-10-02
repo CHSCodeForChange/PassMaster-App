@@ -18,8 +18,8 @@ class PassMini extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Text(
-              pass.student.getName(),
-              style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+              pass.destination,
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             new Text(
               pass.getDateDuration(),

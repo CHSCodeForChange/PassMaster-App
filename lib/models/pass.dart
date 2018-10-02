@@ -10,6 +10,7 @@ class PassModel {
   UserModel student, originTeacher;
   String description;
   String type;
+  String destination;
   
   PassModel(
     this.pk, 
@@ -22,7 +23,8 @@ class PassModel {
     this.student, 
     this.originTeacher, 
     this.description, 
-    this.type
+    this.type,
+    this.destination,
   );
 
   static PassModel testModel() {
@@ -37,7 +39,8 @@ class PassModel {
       UserModel.testModel(), 
       UserModel.testModel(), 
       "Description", 
-      "SRTPass"
+      "SRTPass",
+      "Restroom",
     );
   }
 
@@ -54,6 +57,7 @@ class PassModel {
     originTeacher = UserModel.fromSubJson(json['originTeacher']);
     description = json['description']; 
     type = json['type'];
+    destination = json['destination'];
   }
 
   String getDate() {
