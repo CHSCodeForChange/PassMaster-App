@@ -16,13 +16,23 @@ class UserModel {
     return this.firstname + " " + this.lastname;
   }
 
-  UserModel.fromJson(Map<String, dynamic> json): 
-    pk = json['pk'],
-    username = json['username'],
-    firstname = json['first_name'], 
-    lastname = json['last_name'],
-    email = json['email'],
+  UserModel.fromJson(Map<String, dynamic> json){ 
+    pk = json['pk'];
+    username = json['username'];
+    firstname = json['first_name']; 
+    lastname = json['last_name'];
+    email = json['email'];
     type = json['type'];
+  }
+
+  UserModel.fromSubJson(Map<String, dynamic> json){ 
+    pk = int.parse(json['pk']);
+    username = json['username'];
+    firstname = json['first_name']; 
+    lastname = json['last_name'];
+    email = json['email'];
+    type = json['type'];
+  }
 
   bool isSame(UserModel user) {
     return this.pk == user.pk;

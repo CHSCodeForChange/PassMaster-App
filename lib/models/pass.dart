@@ -42,18 +42,19 @@ class PassModel {
   }
 
 
-  PassModel.fromJson(Map<String, dynamic> json): 
-    pk = json['pk'],
-    approved = json['approved'],
-    date = DateTime.parse(json['date']),
-    startTimeRequested = parseTime(json['startTimeRequested']),
-    endTimeRequested = parseTime(json['endTimeRequested']),
-    timeLeftOrigin = parseTime(json['timeLeftOrigin']),
-    timeArrivedDestination = parseTime(json['timeArrivedDestination']),
-    student = UserModel.fromJson(json['student']),
-    originTeacher = UserModel.fromJson(json['originTeacher']),
-    description = json['description'], 
+  PassModel.fromJson(Map<String, dynamic> json) {
+    pk = json['pk'];
+    approved = json['approved'];
+    date = DateTime.parse(json['date']);
+    startTimeRequested = parseTime(json['startTimeRequested']);
+    endTimeRequested = parseTime(json['endTimeRequested']);
+    timeLeftOrigin = parseTime(json['timeLeftOrigin']);
+    timeArrivedDestination = parseTime(json['timeArrivedDestination']);
+    student = UserModel.fromSubJson(json['student']);
+    originTeacher = UserModel.fromSubJson(json['originTeacher']);
+    description = json['description']; 
     type = json['type'];
+  }
 
   String getDate() {
     return getMonthName(date.month) + " " + date.day.toString() + ", " + date.year.toString();
