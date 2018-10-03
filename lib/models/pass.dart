@@ -1,6 +1,5 @@
 import './user.dart';
 import './datetime.dart';
-import '../api/user.dart';
 
 class PassModel {
   int pk;
