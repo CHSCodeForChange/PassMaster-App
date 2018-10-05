@@ -25,15 +25,13 @@ class PendingPassesState extends State<PendingPasses> {
 
   @override 
   void initState() {
+    list = new PassList(null, user);
     getData();
-    list = new PassList(null);
   }
 
   Future<void> getData() async {
     Iterable<PassModel> passes = await PassListAPI().getData(user.token, "pending");
-    list.state.setState(() {
-      list.state.passes = passes;
-    });
+    list.update(passes);
   }
 
   @override

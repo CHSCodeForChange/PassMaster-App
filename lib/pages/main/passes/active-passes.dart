@@ -6,6 +6,7 @@ import '../../../fragments/pass/pass-list.dart';
 import '../../../api/pass_list.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';
+import './view-pass.dart';
 
 class ActivePasses extends StatefulWidget {
   CurrentUserModel user;
@@ -25,15 +26,13 @@ class ActivePassesState extends State<ActivePasses> {
 
   @override 
   void initState() {
+    list = new PassList(null, user);
     getData();
-    list = new PassList(null);
   }
 
   Future<void> getData() async {
     Iterable<PassModel> passes = await PassListAPI().getData(user.token, "active");
-    list.state.setState(() {
-      list.state.passes = passes;
-    });
+    list.update(passes);
   }
 
   @override
@@ -41,3 +40,8 @@ class ActivePassesState extends State<ActivePasses> {
     return list;
   }
 }
+
+
+
+
+

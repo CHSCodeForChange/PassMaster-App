@@ -25,8 +25,8 @@ class OldPassesState extends State<OldPasses> {
 
   @override 
   void initState() {
+    list = new PassList(null, user);
     getData();
-    list = new PassList(null);
   }
 
   Future<void> getData() async {

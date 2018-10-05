@@ -3,10 +3,24 @@ import 'package:flutter/widgets.dart';
 
 import '../../models/pass.dart';
 
-class Pass extends StatelessWidget {
+class Pass extends StatefulWidget {
+  PassState state;
   PassModel pass;
 
   Pass(this.pass);
+
+  @override
+  PassState createState() => new PassState(this, pass);
+
+}
+
+class PassState extends State<Pass> {
+  PassModel pass;
+
+  PassState(Pass parent, PassModel pass) {
+    this.pass = pass;
+    parent.state = this;
+  }
 
   @override
   Widget build(BuildContext context) {
