@@ -25,6 +25,6 @@ class TeacherPassModel extends PassModel {
   }
 
   TeacherPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
-    this.destinationTeacher = UserModel.fromSubJson(json['destinationTeacher']);
+    this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);
   }
 }

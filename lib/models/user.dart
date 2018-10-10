@@ -17,23 +17,23 @@ class UserModel {
   }
 
   UserModel.fromJson(Map<String, dynamic> json){ 
-    pk = json['pk'];
+    if (json['pk'] is int) {
+      pk = json['pk'];
+    }
+    else if (json['pk'] is String) {
+      try {
+        pk = int.parse(json['pk']);
+      } catch (e) {
+        print(e.toString());
+      }
+    }
     username = json['username'];
     firstname = json['first_name']; 
     lastname = json['last_name'];
     email = json['email'];
     type = json['type'];
   }
-
-  UserModel.fromSubJson(Map<String, dynamic> json){ 
-    pk = int.parse(json['pk']);
-    username = json['username'];
-    firstname = json['first_name']; 
-    lastname = json['last_name'];
-    email = json['email'];
-    type = json['type'];
-  }
-
+  
   bool isSame(UserModel user) {
     return this.pk == user.pk;
   }

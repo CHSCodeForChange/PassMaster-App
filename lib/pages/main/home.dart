@@ -16,10 +16,10 @@ class Home extends StatelessWidget {
     return new Container(
       child: new Column(
         children: <Widget>[
-          // new Container(
-          //   margin: EdgeInsets.only(top:20.0, left: 25.0),
-          //   child: Header(user)
-          // ),
+          new Container(
+            margin: EdgeInsets.only(top:20.0, left: 25.0),
+            child: Header(user)
+          ),
           new Flexible(
             child: new Container(
               padding: EdgeInsets.all(20.0),
