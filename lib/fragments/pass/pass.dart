@@ -31,7 +31,7 @@ class PassState extends State<Pass> {
         width: 500.0, 
         padding: EdgeInsets.all(25.0),
         // alignment: AlignmentDirectional.topStart,
-        child: Column(
+        child: pass == null ? new Container() : Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             new Container(
