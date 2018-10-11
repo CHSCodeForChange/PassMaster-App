@@ -13,15 +13,12 @@ class PassAPI extends API {
     String url = this.baseUrl + 'passes/' + pk.toString() + '?format=json';
     
     if (type != null) {
-      print("Type: " + type);
       url += '&type=' + type;
     }
 
     if (action != null) {
       url += '&action=' + action;
     }
-
-    print(url);
 
     var response = await http.get(
       Uri.encodeFull(url),
@@ -30,7 +27,6 @@ class PassAPI extends API {
       }
     );
 
-    print(response.body);
 
     PassModel pass;
     Map<String, dynamic> data = json.decode(response.body);
@@ -47,6 +43,8 @@ class PassAPI extends API {
       print("THIS WAS NOT A VALID TYPE");
       pass = new PassModel.fromJson(data);
     }
+
+    print(pass.date);
 
     return pass;
   }

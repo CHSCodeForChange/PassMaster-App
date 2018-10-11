@@ -55,7 +55,6 @@ class HomeState extends State<Home> {
           new Flexible(
             child: new Container(
               padding: EdgeInsets.all(20.0),
-//              child: new Pass(PassModel.testModel()),
               child: pass,
             ),
           )

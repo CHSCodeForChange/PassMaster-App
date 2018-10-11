@@ -44,6 +44,9 @@ class PassState extends State<Pass> {
 
   Future<void> getPass() async {
     pass = await PassAPI().getData(user?.token, pk, type, null);
+    setState(() {
+      pass = pass;
+    });
   }
 
   Future<void> signIn() async {
