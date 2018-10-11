@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import './passes/active-passes.dart';
+import './passes/passes.dart';
 import './passes/pending-passes.dart';
 import './passes/old-passes.dart';
 import '../../models/currentuser.dart';
@@ -19,7 +20,12 @@ class Passes extends StatelessWidget {
               Tab(text: 'Old'),
             ];
     } else if (user.type == '2') {
-      return [];
+      return [
+        Tab(text: 'Incomming'),
+        Tab(text: 'Outgoing'),
+        Tab(text: 'Pending'),
+        Tab(text: 'Old'),
+      ];
     }
   }
 
@@ -31,7 +37,12 @@ class Passes extends StatelessWidget {
               new OldPasses(user),
             ];
     } else if (user.type == '2') {
-      return [];
+      return [
+        new GenericPasses(user, 'teacher-incomming'),
+        new GenericPasses(user, 'teacher-outgoing'),
+        new GenericPasses(user, 'teacher-pending'),
+        new GenericPasses(user, 'teacher-old'),
+      ];
     }
   }
 
@@ -41,7 +52,7 @@ class Passes extends StatelessWidget {
       margin: EdgeInsets.only(top:20.0),
       child: DefaultTabController(
         initialIndex: 0,
-        length: 3,
+        length: user.type == '1' ? 3 : 4,
         child: Scaffold(
           appBar: TabBar(
             labelColor: Colors.white,
