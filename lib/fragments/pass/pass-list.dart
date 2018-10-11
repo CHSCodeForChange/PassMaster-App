@@ -39,10 +39,27 @@ class PassListState extends State<PassList> {
 
   @override
   Widget build(BuildContext context) {
+    if (passes == null) {
+      return new Column(
+        children: <Widget>[new Container(
+          height: 600.0, // force card to take up full space
+          width: 600.0,
+          alignment: FractionalOffset.center,
+          child: new SizedBox(
+            width: 75.0,
+            height: 75.0,
+            child: new CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+              strokeWidth: 5.0,
+            ),
+          )
+        )]
+      );
+    }
     return new ListView.builder(
       padding: new EdgeInsets.all(8.0),
       itemExtent: 100.0,
-      itemCount: passes != null ? passes.length : 0,
+      itemCount: passes?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         return new GestureDetector(
           onTap: () {

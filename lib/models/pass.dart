@@ -86,7 +86,7 @@ class PassModel {
   }
 
   String getTime(Duration duration) {
-    return duration.inHours.toString() + ":" + (duration.inMinutes%60).toString();
+    return duration.inHours.toString() + ":" + (duration.inMinutes%60<10 ? "0"+(duration.inMinutes%60).toString() : (duration.inMinutes%60).toString());
   }
 
   String getMonthName(int month) {
