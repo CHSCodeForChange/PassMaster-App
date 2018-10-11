@@ -27,7 +27,7 @@ class PassState extends State<Pass> {
 
   @override
   Widget build(BuildContext context) {
-    String title;
+    String title = "FAILED: PASSMODEL NOT VALID CHILD TYPE";
     List<Widget> descriptors = [];
     TextStyle descriptorStyle = TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0);
     if(pass == null){
@@ -44,6 +44,7 @@ class PassState extends State<Pass> {
                 width: 75.0,
                 height: 75.0,
                 child: new CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
                   strokeWidth: 5.0,
                 ),
               )
