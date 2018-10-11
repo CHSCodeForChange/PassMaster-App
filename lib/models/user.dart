@@ -16,7 +16,10 @@ class UserModel {
     return this.firstname + " " + this.lastname;
   }
 
-  UserModel.fromJson(Map<String, dynamic> json){ 
+  UserModel.fromJson(Map<String, dynamic> json){
+    if (json == null) {
+      return;
+    }
     if (json['pk'] is int) {
       pk = json['pk'];
     }

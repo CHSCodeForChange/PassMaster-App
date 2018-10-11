@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pass_master/api/pass.dart';
+import 'package:pass_master/models/teacher-pass.dart';
 
 import '../../fragments/header.dart';
 import '../../fragments/pass/pass.dart';
@@ -29,10 +31,15 @@ class HomeState extends State<Home> {
 
   Future<void> getData() async {
     Iterable<PassModel> passes = await PassListAPI().getData(user.token, null);
+    PassModel pass_raw = passes.elementAt(0);
+    print(pass_raw.pk);
+    print(pass_raw.type);
+
+    var pass_child = await PassAPI().getData(user.token, pass_raw.pk, pass_raw.type, null);
+    print(pass_child);
 
     pass.state.setState(() {
-      pass.state.pass = passes.elementAt(0);
-      print(passes.elementAt(0));
+      pass.state.pass = pass_child;
     });
 
   }
