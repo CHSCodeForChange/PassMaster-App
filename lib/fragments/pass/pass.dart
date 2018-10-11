@@ -1,32 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pass_master/api/pass.dart';
 import 'package:pass_master/models/location-pass.dart';
 import 'package:pass_master/models/srt-pass.dart';
 import 'package:pass_master/models/teacher-pass.dart';
 
 import '../../models/pass.dart';
+import '../../models/currentuser.dart';
 
 class Pass extends StatefulWidget {
   PassState state;
   PassModel pass;
+  CurrentUserModel user;
+  String type;
+  int pk;
 
-  Pass(this.pass);
+  Pass(this.user, this.type, this.pk);
 
   @override
-  PassState createState() => new PassState(this, pass);
+  PassState createState() => new PassState(this, user, type, pk);
 
 }
 
 class PassState extends State<Pass> {
   PassModel pass;
+  CurrentUserModel user;
+  String type;
+  int pk;
 
-  PassState(Pass parent, PassModel pass) {
-    this.pass = pass;
+  PassState(Pass parent, CurrentUserModel user, String type, int pk) {
     parent.state = this;
+    this.user = user;
+    this.type = type;
+    this.pk = pk;
+  }
+
+  @override
+  void initState() {
+    if (type != null && pk != null) {
+      getPass();
+    }
+  }
+
+  Future<void> getPass() async {
+    pass = await PassAPI().getData(user?.token, pk, type, null);
+  }
+
+  Future<void> signIn() async {
+    await PassAPI().getData(user.token, pk, type, "signin");
+    pass = await PassAPI().getData(user.token, pk, type, null);
+  }
+
+  Future<void> signOut() async {
+    await PassAPI().getData(user.token, pk, type, "signout");
+    pass = await PassAPI().getData(user.token, pk, type, null);
   }
 
   @override
   Widget build(BuildContext context) {
+
+    // Title Setup
     Row titleRow = new Row(
 		children: <Widget>[
 			new Icon(Icons.warning),
@@ -37,8 +70,12 @@ class PassState extends State<Pass> {
 			),
 		],
     );
+
+    // Descriptors
     List<Widget> descriptors = [];
     TextStyle descriptorStyle = TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0);
+
+    //Shows loading if pass is null
     if(pass == null){
       // Loading animation
       return new Card(
@@ -74,6 +111,7 @@ class PassState extends State<Pass> {
       }
     }
 
+    //Set title and icon depending on pass type
     if(pass is LocationPassModel) {
       LocationPassModel loc_pass = pass as LocationPassModel;
       titleRow.children.clear();
@@ -105,6 +143,75 @@ class PassState extends State<Pass> {
 	      style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
       ),);
     }
+
+    // Initialize sign in and out buttons
+    RaisedButton signInButton = new RaisedButton(
+            color: Colors.blueAccent,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            onPressed: () {
+              signIn();
+            },
+            child: new Container(
+              width: 500.0,
+              child: new Text(
+                "Sign in",
+                style: new TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            )
+    );
+
+    RaisedButton signOutButton = new RaisedButton(
+            color: Colors.blueAccent,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            onPressed: () {
+              signOut();
+            },
+            child: new Container(
+              width: 500.0,
+              child: new Text(
+                "Sign out",
+                style: new TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            )
+    );
+    Expanded actionButtons;
+    // If the user is a teacher, show correct buttons
+    if (this.user.type == "2") {
+      if (pass.timeLeftOrigin == null) {
+        actionButtons = new Expanded(
+          child: new Container(
+            alignment: FractionalOffset.bottomCenter,
+            child: signOutButton,
+          ),
+        );
+      }
+      else if (pass.timeArrivedDestination == null) {
+        actionButtons = new Expanded(
+          child: new Container(
+            alignment: FractionalOffset.bottomCenter,
+            child: signInButton,
+          ),
+        );
+      }
+      else {
+        actionButtons = new Expanded(
+          child: new Container(
+            alignment: FractionalOffset.bottomCenter,
+          ),
+        );
+      }
+    }
+    // If the user is a student, show nothing
+    else {
+      actionButtons = new Expanded(
+        child: new Container(
+          alignment: FractionalOffset.bottomCenter,
+        ),
+      );
+    }
+
 
 
     return new Card(
@@ -142,12 +249,7 @@ class PassState extends State<Pass> {
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-            new Expanded(
-              child: new Container(
-                alignment: FractionalOffset.bottomCenter,
-                child: new MaterialButton(onPressed: null)
-              ),
-            )
+            actionButtons
           ],
         ),
       ),

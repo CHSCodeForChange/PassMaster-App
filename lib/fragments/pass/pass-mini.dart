@@ -23,7 +23,7 @@ class PassMini extends StatelessWidget {
     return new Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: new Container(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

@@ -25,19 +25,20 @@ class HomeState extends State<Home> {
 
   @override
   void initState() {
-    pass = new Pass(null);
+    pass = new Pass(this.user, null, null);
     getData();
   }
 
   Future<void> getData() async {
+
     Iterable<PassModel> passes = await PassListAPI().getData(user.token, null);
     PassModel pass_raw = passes.elementAt(0);
 
-    var pass_child = await PassAPI().getData(user.token, pass_raw.pk, pass_raw.type, null);
-
     pass.state.setState(() {
-      pass.state.pass = pass_child;
+      pass.state.type = pass_raw.type;
+      pass.state.pk = pass_raw.pk;
     });
+    pass.state.getPass();
 
   }
 

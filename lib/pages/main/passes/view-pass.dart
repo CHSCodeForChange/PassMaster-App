@@ -32,14 +32,15 @@ class ViewPassState extends State<ViewPass> {
 
   @override 
   void initState() {
-    pass = new Pass(null);
+    pass = new Pass(this.user, pass_data.type, pass_data.pk);
     getData();
   }
 
   Future<void> getData() async {
-    pass_data = await PassAPI().getData(user.token, pass_data.pk, pass_data.type, null);
     pass.state.setState(() {
-      pass.state.pass = pass_data;
+      pass.state.type = pass_data.type;
+      pass.state.pk = pass_data.pk;
+      pass.state.getPass();
     });
   }
 
