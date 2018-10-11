@@ -1,5 +1,4 @@
 import './user.dart';
-import './datetime.dart';
 
 class PassModel {
   int pk;
@@ -12,8 +11,19 @@ class PassModel {
   String destination;
   
   PassModel(
-    this.pk, 
-    this.approved, 
+    this.date,
+    this.startTimeRequested, 
+    this.endTimeRequested,
+    this.student, 
+    this.originTeacher, 
+    this.description, 
+    this.type,
+    this.destination,
+  );
+
+  PassModel.filled(
+    this.pk,
+    this.approved,
     this.date,
     this.startTimeRequested, 
     this.endTimeRequested, 
@@ -27,7 +37,7 @@ class PassModel {
   );
 
   static PassModel testModel() {
-    return PassModel(
+    return PassModel.filled(
       0, 
       true, 
       DateTime.now(),
@@ -61,6 +71,10 @@ class PassModel {
 
   String getDate() {
     return getMonthName(date.month) + " " + date.day.toString() + ", " + date.year.toString();
+  }
+
+  String getDateJson() {
+    return date.year.toString() + "-" + date.month.toString() + "-" + date.day.toString();
   }
 
   String getDuration() {

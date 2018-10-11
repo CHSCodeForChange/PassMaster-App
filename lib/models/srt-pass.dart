@@ -7,21 +7,17 @@ class SRTPassModel extends PassModel {
   String session;
 
   SRTPassModel(
-    int pk, 
-    bool approved,
     DateTime date, 
     UserModel student, 
     UserModel originTeacher,
     String description, 
-    String type,
     UserModel destinationTeacher,
     String session
-  ) 
-  :super(pk, approved,
-    date, getStart(session), getEnd(session), null,null,
+  ) :super(date, getStart(session), getEnd(session),
     student, originTeacher,
-    description, "LocationPass", destinationTeacher.getName()) {
+    description, "SRTPass", destinationTeacher.getName()) {
       this.destinationTeacher = destinationTeacher;
+      this.session = session;
   }
 
   static Duration getStart(String session) {
@@ -45,6 +41,16 @@ class SRTPassModel extends PassModel {
         return Duration(hours: 11, minutes: 3);
     }
   }
+
+  Map<String, dynamic> toJson() =>
+    {
+      'date' : getDateJson(), 
+      'student' : student.pk, 
+      'originTeacher' : originTeacher.toJson(),
+      'description' : description, 
+      'destinationTeacher' : destinationTeacher.toJson(),
+      'session': session
+    };
 
   SRTPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);

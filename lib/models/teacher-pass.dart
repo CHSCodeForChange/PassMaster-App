@@ -6,8 +6,6 @@ class TeacherPassModel extends PassModel {
   UserModel destinationTeacher;
 
   TeacherPassModel(
-    int pk, 
-    bool approved,
     DateTime date, 
     Duration startTimeRequested, 
     Duration endTimeRequested, 
@@ -17,8 +15,7 @@ class TeacherPassModel extends PassModel {
     String type,
     UserModel destinationTeacher
   ) 
-  :super(pk, approved,
-    date, startTimeRequested, endTimeRequested, null,null,
+  :super(date, startTimeRequested, endTimeRequested,
     student, originTeacher,
     description, "LocationPass", destinationTeacher.getName()) {
       this.destinationTeacher = destinationTeacher;
@@ -27,4 +24,15 @@ class TeacherPassModel extends PassModel {
   TeacherPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);
   }
+
+  Map<String, dynamic> toJson() =>
+    {
+      'date' : date, 
+      'student' : student.pk, 
+      'originTeacher' : originTeacher.pk,
+      'description' : description, 
+      'destinationTeacher' : destinationTeacher,
+      'startTimeRequested': startTimeRequested,
+      'endTimeRequested': endTimeRequested,
+    };
 }

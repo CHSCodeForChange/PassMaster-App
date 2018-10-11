@@ -18,8 +18,6 @@ class Add extends StatefulWidget {
 class AddState extends State<Add> {
   CurrentUserModel user;
 
-  AddState(this.user);
-
   int value = 0;
 
   void function (int value) {
@@ -29,55 +27,50 @@ class AddState extends State<Add> {
     print(this.value);
   }
 
+  TeacherPassForm teacherPassForm;
+  LocationPassForm locationPassForm;
+  SRTPassForm srtPassForm;
+
+  AddState(this.user);
+
   Widget getForm() {
     switch(value) {
       case 0:
-        return TeacherPassForm();
+        return TeacherPassForm(user);
       case 1: 
-        return LocationPassForm();
+        return LocationPassForm(user);
       case 2: 
-        return SRTPassForm();
+        return SRTPassForm(user);
     }
   }
   
   @override
   Widget build(BuildContext context) {
     return Container( 
-      margin: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+      margin: EdgeInsets.only(top: 15.0, bottom: 10.0, left: 10.0, right: 10.0),
       child: new Column(
         children: <Widget>[
           new Container(
             width: double.infinity,
             child: new Container(
               margin: EdgeInsets.only(bottom: 1.25),
-              child: new Dropdown(["Teacher", "Location", "SRT"], function)
+              child: new Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(200.0)),
+                child: new Container(
+                  color: Colors.white,
+                  padding: EdgeInsets.all(16.0),
+                  child: new Dropdown(["Teacher", "Location", "SRT"], function)
+                ),
+              ),
             ),
           ),
-          new Container(
+          new Expanded(
             child: new Container(
               margin: EdgeInsets.only(top: 1.25, bottom: 1.25),
-              padding: EdgeInsets.all(10.0),
-              child: new Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                child: new Container(
-                  width: double.infinity,
-
-                  padding: EdgeInsets.all(10.0),
-                  child: getForm()
-                )
-              ),
+              padding: EdgeInsets.all(0.0),
+              child: getForm()
             )
           ),
-          new Container(
-            margin: EdgeInsets.only(top: 1.25, bottom: 2.5),
-            width: 325.0,
-            child: new RaisedButton(
-              onPressed: () {},
-              color: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              child: new Text('Submit'),
-            ),
-          )
         ],
       ),
     );

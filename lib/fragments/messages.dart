@@ -6,6 +6,7 @@ class Messages {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(
       SnackBar(
+        duration: Duration(seconds: 2),
         backgroundColor: Colors.red,
         content: Text(
           message,
@@ -19,6 +20,7 @@ class Messages {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(
       SnackBar(
+        duration: Duration(seconds: 2),
         backgroundColor: Colors.teal,
         content: Text(
           message,

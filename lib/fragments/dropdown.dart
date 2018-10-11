@@ -34,22 +34,16 @@ class DropdownState extends State<Dropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      child: new Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(10.0),
-        child: new DropdownButton(
-          items: this.types,
-          value: this.value,
-          onChanged: (value) {
-            setState(() {
-              this.value = value; 
-            });
-            function(value);
-          },
-        )
-      )
+    return new DropdownButton(
+      items: this.types,
+      value: this.value,
+      style: TextStyle(fontSize: 17.0, color: Colors.grey),
+      onChanged: (value) {
+        setState(() {
+          this.value = value; 
+        });
+        function(value);
+      },
     );
   }  
 }

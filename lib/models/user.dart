@@ -33,6 +33,15 @@ class UserModel {
     email = json['email'];
     type = json['type'];
   }
+
+  Map<String, dynamic> toJson() => {
+    "pk": pk,
+    "username": username,
+    "first_name": firstname,
+    "last_name": lastname,
+    "email": email,
+    "type": type
+  };
   
   bool isSame(UserModel user) {
     return this.pk == user.pk;
