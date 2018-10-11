@@ -48,10 +48,18 @@ class ViewPassState extends State<ViewPass> {
   Widget build(BuildContext context) {
     return new Material(
       color: Colors.orangeAccent,
-        child: new Container(
-          padding: EdgeInsets.all(20.0),
-          child: pass,
+      child: new Scaffold(
+        backgroundColor: Colors.orangeAccent,
+        appBar: new AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.orangeAccent,
         ),
+        body: new Container(
+          alignment: Alignment.topCenter,
+          padding: new EdgeInsets.only(top: 0.0, bottom: 0.0, left: 25.0, right: 25.0),
+          child: pass,
+        )
+      )
     );
   }
 }
