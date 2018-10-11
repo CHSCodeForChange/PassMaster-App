@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pass_master/api/pass.dart';
 import '../../models/pass.dart';
 import '../../models/currentuser.dart';
+import '../messages.dart';
 
 class Pass extends StatefulWidget {
   PassState state;
@@ -44,13 +45,21 @@ class PassState extends State<Pass> {
   }
 
   Future<void> signIn() async {
+    Messages.message("Signing In", context);
     await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signin");
     pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
+    setState((){
+      pass = pass;
+    });
   }
 
   Future<void> signOut() async {
+    Messages.message("Signing Out", context);
     await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signout");
     pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
+    setState((){
+      pass = pass;
+    });
   }
 
   @override
@@ -99,11 +108,11 @@ class PassState extends State<Pass> {
     
     descriptors.add(new Row(children: <Widget>[new Text("Origin Teacher: " + (pass?.originTeacher?.getName() ?? ""), style: descriptorStyle)],));
     if(pass.timeLeftOrigin != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Time left origin: " + pass.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
+      descriptors.add(new Row(children: <Widget>[new Text("Left Origin: " + pass.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
       pass.getTime(pass.timeLeftOrigin);
     }
     if(pass.timeArrivedDestination != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Time arrived destination: " + pass.timeArrivedDestination.toString(), style: descriptorStyle),],));
+      descriptors.add(new Row(children: <Widget>[new Text("Arrived Destination: " + pass.getTime(pass.timeArrivedDestination), style: descriptorStyle),],));
     }
 
     // Initialize sign in and out buttons
