@@ -27,10 +27,20 @@ class PassState extends State<Pass> {
 
   @override
   Widget build(BuildContext context) {
-    String title = "FAILED: PASSMODEL NOT VALID CHILD TYPE";
+    Row titleRow = new Row(
+		children: <Widget>[
+			new Icon(Icons.warning),
+			new Text(
+				"FAILED: PASSMODEL NOT VALID CHILD TYPE",
+				textAlign: TextAlign.left,
+				style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+			),
+		],
+    );
     List<Widget> descriptors = [];
     TextStyle descriptorStyle = TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0);
     if(pass == null){
+      // Loading animation
       return new Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
         child: new Column(
@@ -66,16 +76,34 @@ class PassState extends State<Pass> {
 
     if(pass is LocationPassModel) {
       LocationPassModel loc_pass = pass as LocationPassModel;
-      title = loc_pass.location;
+      titleRow.children.clear();
+      titleRow.children.add(new Container(child: new Icon(Icons.location_on), padding: EdgeInsets.all(10.0),));
+      titleRow.children.add(new Text(
+	      loc_pass.location,
+	      textAlign: TextAlign.left,
+	      style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+      ),);
     }
     else if (pass is SRTPassModel) {
       SRTPassModel srt_pass = pass as SRTPassModel;
-      title = srt_pass.destinationTeacher.getName();
+      titleRow.children.clear();
+      titleRow.children.add(new Container(child: new Icon(Icons.hourglass_full), padding: EdgeInsets.all(10.0),));
+      titleRow.children.add(new Text(
+	      srt_pass.destinationTeacher.getName(),
+	      textAlign: TextAlign.left,
+	      style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+      ),);
       descriptors.add(new Row(children: <Widget>[new Text("SRT Session: " + srt_pass.session, style: descriptorStyle),],));
     }
     else if (pass is TeacherPassModel) {
       TeacherPassModel teacher_pass = pass as TeacherPassModel;
-      title = teacher_pass.destinationTeacher.getName();
+      titleRow.children.clear();
+      titleRow.children.add(new Container(child: new Icon(Icons.person), padding: EdgeInsets.all(10.0),));
+      titleRow.children.add(new Text(
+	      teacher_pass.destinationTeacher.getName(),
+	      textAlign: TextAlign.left,
+	      style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+      ),);
     }
 
 
@@ -90,11 +118,7 @@ class PassState extends State<Pass> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             new Container(
-              child: new Text(
-                title,
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
-              ),
+              child: titleRow,
             ),
             new Container(
               alignment: Alignment.bottomLeft,
