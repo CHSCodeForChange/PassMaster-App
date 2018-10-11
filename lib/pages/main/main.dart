@@ -19,15 +19,49 @@ class Main extends StatefulWidget {
 class MainState extends State<Main> {
   CurrentUserModel user;
   List pages;
+  List<BottomNavigationBarItem> bar;
   int index = 1;
 
   MainState(user) {
     this.user = user;
-    pages = [
-      new Add(user),
-      new Home(user),
-      new Passes(user)
-    ];
+    if (user.type == '1') {
+      pages = [
+        new Add(user),
+        new Home(user),
+        new Passes(user)
+      ];
+
+      bar = [
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.add),
+              title: new Text('Add'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.home),
+              title: new Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              title: Text('Passes')
+            )
+          ];
+    } else if (user.type == '2') {
+       pages = [
+        new Add(user),
+        new Passes(user)
+      ];
+      
+      bar = [
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.add),
+              title: new Text('Add'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              title: Text('Passes')
+            )
+          ];
+    }
   }
 
   void onTabTapped(int index) {
@@ -47,24 +81,10 @@ class MainState extends State<Main> {
       ),
       child: Scaffold(
 
-        bottomNavigationBar: BottomNavigationBar(
-           
+        bottomNavigationBar: BottomNavigationBar( 
           currentIndex: index, 
           onTap: onTabTapped,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.add),
-              title: new Text('Add'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              title: Text('Passes')
-            )
-          ],
+          items: bar,
         ),
 
         body: pages[index],
