@@ -1,4 +1,6 @@
 import './user.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class PassModel {
   int pk;
@@ -86,7 +88,15 @@ class PassModel {
   }
 
   String getTime(Duration duration) {
-    return duration.inHours.toString() + ":" + (duration.inMinutes%60<10 ? "0"+(duration.inMinutes%60).toString() : (duration.inMinutes%60).toString());
+    return duration == null ? "" : duration.inHours.toString() + ":" + (duration.inMinutes%60<10 ? "0"+(duration.inMinutes%60).toString() : (duration.inMinutes%60).toString());
+  }
+
+  String getName() {
+    return destination;
+  }
+
+  Icon getIcon() {
+    return Icon(Icons.layers);
   }
 
   String getMonthName(int month) {

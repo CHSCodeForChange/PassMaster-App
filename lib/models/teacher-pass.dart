@@ -1,5 +1,7 @@
 import './user.dart';
 import './pass.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 
 class TeacherPassModel extends PassModel {
@@ -35,4 +37,14 @@ class TeacherPassModel extends PassModel {
       'startTimeRequested': startTimeRequested,
       'endTimeRequested': endTimeRequested,
     };
+
+  @override 
+  String getName() {
+    return destinationTeacher.getName();
+  }
+
+  @override
+  Icon getIcon() {
+    return Icon(Icons.person);
+  }
 }

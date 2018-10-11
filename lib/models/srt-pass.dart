@@ -1,5 +1,7 @@
 import './user.dart';
 import './pass.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 
 class SRTPassModel extends PassModel {
@@ -18,6 +20,35 @@ class SRTPassModel extends PassModel {
     description, "SRTPass", destinationTeacher.getName()) {
       this.destinationTeacher = destinationTeacher;
       this.session = session;
+  }
+
+  @override 
+  String getDateDuration() {
+    return getDate() + ", Session: " + getSession();
+  }
+
+  @override 
+  String getName() {
+    return destinationTeacher.getName();
+  }
+
+  @override
+  Icon getIcon() {
+    return Icon(Icons.hourglass_full);
+  }
+
+  String getSession() {
+    if (session == null) {
+      return "None";
+    }
+    switch (session) {
+      case '1':
+        return 'First';
+      case '2':
+        return 'Second';
+      case '3':
+        return 'Both';
+    }
   }
 
   static Duration getStart(String session) {
@@ -54,5 +85,6 @@ class SRTPassModel extends PassModel {
 
   SRTPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);
+    this.session = json['session'];
   }
 }

@@ -27,6 +27,7 @@ class PassAPI extends API {
       }
     );
 
+    // print(response.body);
 
     PassModel pass;
     Map<String, dynamic> data = json.decode(response.body);
@@ -44,7 +45,6 @@ class PassAPI extends API {
       pass = new PassModel.fromJson(data);
     }
 
-    print(pass.date);
 
     return pass;
   }

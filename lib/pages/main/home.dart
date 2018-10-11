@@ -26,7 +26,7 @@ class HomeState extends State<Home> {
 
   @override
   void initState() {
-    pass = new Pass(this.user, null, null);
+    pass = new Pass(this.user, null);
     getData();
   }
 
@@ -36,8 +36,7 @@ class HomeState extends State<Home> {
     PassModel pass_raw = passes.elementAt(0);
 
     pass.state.setState(() {
-      pass.state.type = pass_raw.type;
-      pass.state.pk = pass_raw.pk;
+      pass.state.pass = pass_raw;
     });
     pass.state.getPass();
 

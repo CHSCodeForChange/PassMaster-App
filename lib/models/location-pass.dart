@@ -1,5 +1,7 @@
 import './user.dart';
 import './pass.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class LocationPassModel extends PassModel {
   String location;
@@ -33,4 +35,14 @@ class LocationPassModel extends PassModel {
       'startTimeRequested': startTimeRequested,
       'endTimeRequested': endTimeRequested,
     };
+
+  @override 
+  String getName() {
+    return location;
+  }
+
+  @override
+  Icon getIcon() {
+    return Icon(Icons.location_on);
+  }
 }

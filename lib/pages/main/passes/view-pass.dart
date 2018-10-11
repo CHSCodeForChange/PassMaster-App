@@ -32,16 +32,7 @@ class ViewPassState extends State<ViewPass> {
 
   @override 
   void initState() {
-    pass = new Pass(this.user, pass_data.type, pass_data.pk);
-    getData();
-  }
-
-  Future<void> getData() async {
-    pass.state.setState(() {
-      pass.state.type = pass_data.type;
-      pass.state.pk = pass_data.pk;
-      pass.state.getPass();
-    });
+    pass = new Pass(this.user, pass_data);
   }
 
   @override
@@ -56,7 +47,7 @@ class ViewPassState extends State<ViewPass> {
         ),
         body: new Container(
           alignment: Alignment.topCenter,
-          padding: new EdgeInsets.only(top: 0.0, bottom: 0.0, left: 25.0, right: 25.0),
+          padding: new EdgeInsets.only(top: 0.0, bottom: 50.0, left: 25.0, right: 25.0),
           child: pass,
         )
       )
