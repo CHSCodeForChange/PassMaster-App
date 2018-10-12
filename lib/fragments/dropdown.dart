@@ -2,13 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Dropdown extends StatefulWidget {
-  List<String> strings = [];
+  List<String> strings;
+  List<String> values;
   var function;
+  DropdownState state;
 
-  Dropdown(this.strings, this.function);
+  int getIndex() {
+    return state.value;
+  }
+
+  String getValue() {
+    return values != null ? values[getIndex()] : getIndex().toString();
+  }
+
+  Dropdown(List<String> strings, {List<String> values, var function}) {
+    this.strings = strings;
+    this.values = values;
+    this.function = function;
+  }
 
   @override
-  DropdownState createState() => new DropdownState(this.strings, this.function);
+  DropdownState createState() => new DropdownState(this, strings, function);
 }
 
 class DropdownState extends State<Dropdown> {
@@ -16,7 +30,8 @@ class DropdownState extends State<Dropdown> {
   var function;
   List<DropdownMenuItem> types = [];
 
-  DropdownState (List<String> strings, var function) {
+  DropdownState (Dropdown parent, List<String> strings, var function) {
+    parent.state = this;
     this.function = function;
 
     for (int i = 0; i < strings.length; i++) {
@@ -42,7 +57,9 @@ class DropdownState extends State<Dropdown> {
         setState(() {
           this.value = value; 
         });
-        function(value);
+        if (function != null) {
+          function(value);
+        }
       },
     );
   }  

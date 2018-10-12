@@ -59,7 +59,7 @@ class AddState extends State<Add> {
                 child: new Container(
                   color: Colors.white,
                   padding: EdgeInsets.all(16.0),
-                  child: new Dropdown(["Teacher", "Location", "SRT"], function)
+                  child: new Dropdown(["Teacher", "Location", "SRT"], function: function)
                 ),
               ),
             ),

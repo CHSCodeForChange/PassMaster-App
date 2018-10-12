@@ -8,8 +8,8 @@ class LocationPassModel extends PassModel {
 
   LocationPassModel(
     DateTime date,
-    Duration startTimeRequested,
-    Duration endTimeRequested,
+    TimeOfDay startTimeRequested,
+    TimeOfDay endTimeRequested,
     UserModel student, 
     UserModel originTeacher,
     String description, 

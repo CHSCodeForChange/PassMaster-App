@@ -9,12 +9,11 @@ class TeacherPassModel extends PassModel {
 
   TeacherPassModel(
     DateTime date, 
-    Duration startTimeRequested, 
-    Duration endTimeRequested, 
+    TimeOfDay startTimeRequested, 
+    TimeOfDay endTimeRequested, 
     UserModel student, 
     UserModel originTeacher,
     String description, 
-    String type,
     UserModel destinationTeacher
   ) 
   :super(date, startTimeRequested, endTimeRequested,

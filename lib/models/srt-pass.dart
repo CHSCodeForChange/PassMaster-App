@@ -2,6 +2,7 @@ import './user.dart';
 import './pass.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import './datetime.dart';
 
 
 class SRTPassModel extends PassModel {
@@ -14,7 +15,7 @@ class SRTPassModel extends PassModel {
     UserModel originTeacher,
     String description, 
     UserModel destinationTeacher,
-    String session
+     String session
   ) :super(date, getStart(session), getEnd(session),
     student, originTeacher,
     description, "SRTPass", destinationTeacher.getName()) {
@@ -24,7 +25,7 @@ class SRTPassModel extends PassModel {
 
   @override 
   String getDateDuration() {
-    return getDate() + ", Session: " + getSession();
+    return MyDateTime.getDate(date) + ", Session: " + getSession();
   }
 
   @override 
@@ -51,31 +52,31 @@ class SRTPassModel extends PassModel {
     }
   }
 
-  static Duration getStart(String session) {
+  static TimeOfDay getStart(String session) {
     switch(session) {
       case "1":
-        return Duration(hours: 9, minutes: 30);
+        return TimeOfDay(hour: 9, minute: 30);
       case "2":
-        return Duration(hours: 10, minutes: 20);
+        return TimeOfDay(hour: 10, minute: 20);
       case "3":
-        return Duration(hours: 9, minutes: 30);
+        return TimeOfDay(hour: 9, minute: 30);
     }
   }
 
-  static Duration getEnd(String session) {
+  static TimeOfDay getEnd(String session) {
     switch(session) {
       case "1":
-        return Duration(hours: 10, minutes: 20);
+        return TimeOfDay(hour: 10, minute: 20);
       case "2":
-        return Duration(hours: 11, minutes: 3);
+        return TimeOfDay(hour: 11, minute: 3);
       case "3":
-        return Duration(hours: 11, minutes: 3);
+      return TimeOfDay(hour: 11, minute: 3);
     }
   }
 
   Map<String, dynamic> toJson() =>
     {
-      'date' : getDateJson(), 
+      'date' : MyDateTime.getDateJson(date), 
       'student' : student.pk, 
       'originTeacher' : originTeacher.toJson(),
       'description' : description, 

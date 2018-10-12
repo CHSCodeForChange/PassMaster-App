@@ -13,16 +13,16 @@ class CreatePassAPI extends API {
     String url = this.baseUrl + 'create/?format=json&type=';
 
     Map<String, dynamic> data;
-    if (type=="LocationPassModel") {
+    
+    if (type=="LocationPass") {
       data = (pass as LocationPassModel).toJson();
-      url += 'LocationPass';
-    } else if (type == "TeacherPassModel") {
+    } else if (type == "TeacherPass") {
       data = (pass as TeacherPassModel).toJson();
-      url += 'TeacherPass';
-    } else if (type == "SRTPassModel") {
+    } else if (type == "SRTPass") {
       data = (pass as SRTPassModel).toJson();
-      url += 'SRTPass';
     }
+
+    url += type;
 
     print(url);
     print(data);

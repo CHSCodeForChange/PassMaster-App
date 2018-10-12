@@ -1,25 +1,65 @@
-// class MyDateTime {
-//   DateTime datetime;
+import 'package:flutter/material.dart';
 
-//   MyDateTime(this.datetime);
+class MyDateTime {
+  static String getDate(date) {
+    return getMonthName(date.month) + " " + date.day.toString() + ", " + date.year.toString();
+  }
 
-//   static now() {
-//     return MyDateTime(DateTime.now());
-//   }
+  static String getDateJson(date) {
+    return date.year.toString() + "-" + date.month.toString() + "-" + date.day.toString();
+  }
 
-//   String getAMPM() {
-//     return this.datetime.hour <= 12 ? "AM" : "PM";
-//   }
+  static String getMonthName(int month) {
+    switch(month) {
+      case 1:
+        return "January";
+      case 2:
+        return "Feburary";
+      case 3:
+        return "March";
+      case 4:
+        return "April";
+      case 5:
+        return "May";
+      case 6:
+        return "June";
+      case 7:
+        return "July";
+      case 8:
+        return "August";
+      case 9:
+        return "September";
+      case 10:
+        return "October";
+      case 11:
+        return "November";
+      case 12:
+        return "December";
+    }
+  }
 
-//   int getHour() {
-//     return this.datetime.hour % 12;
-//   }
+  static TimeOfDay parseTime(String time) {
+    TimeOfDay parsedTime;
+    if (time != null) {
+      List<String> parts = time.split(":");
+      parsedTime =  new TimeOfDay(
+        hour: int.parse(parts.elementAt(0)), 
+        minute: int.parse(parts.elementAt(1)),
+      );
+    } else {
+      parsedTime = null;
+    }
+    return parsedTime;
+  }
 
-//   String getTime() {
-//     return getHour().toString() + ":" + this.datetime.minute.toString() + " " + getAMPM();
-//   }
-
-//   String getDate() {
-//     return this.datetime.month.toString() + "/" + this.datetime.day.toString() + "/" + datetime.year.toString();
-//   }
-// }
+  static String getTime(TimeOfDay time) {
+    if (time == null) {
+      return "";
+    } else {
+      String hour = (time.hour%12 == 0 ? 12 : time.hour%12).toString();
+      String minute =(time.minute > 10 ? "" : "0") + time.minute.toString();
+      String ampm = time.hour >= 12 ? "PM" : "AM";
+      return hour + ":" + minute + " " + ampm;
+    }
+  }
+}

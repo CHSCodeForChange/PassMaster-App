@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pass_master/api/pass.dart';
 import '../../models/pass.dart';
+import '../../models/datetime.dart';
 import '../../models/currentuser.dart';
 import '../messages.dart';
 
@@ -108,11 +109,11 @@ class PassState extends State<Pass> {
     
     descriptors.add(new Row(children: <Widget>[new Text("Origin Teacher: " + (pass?.originTeacher?.getName() ?? ""), style: descriptorStyle)],));
     if(pass.timeLeftOrigin != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Left Origin: " + pass.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
-      pass.getTime(pass.timeLeftOrigin);
+      descriptors.add(new Row(children: <Widget>[new Text("Left Origin: " + MyDateTime.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
+     MyDateTime.getTime(pass.timeLeftOrigin);
     }
     if(pass.timeArrivedDestination != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Arrived Destination: " + pass.getTime(pass.timeArrivedDestination), style: descriptorStyle),],));
+      descriptors.add(new Row(children: <Widget>[new Text("Arrived Destination: " + MyDateTime.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
     }
 
     // Initialize sign in and out buttons

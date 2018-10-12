@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-
-import '../../../models/user.dart';
-import '../../../models/srt-pass.dart';
+import '../../../models/teacher-pass.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';
-import '../../../fragments/user-search.dart';
-import '../../../fragments/dropdown.dart';
-import '../../../fragments/form/button-field.dart';
-import './parent.dart';
+
+import '../../../fragments/form/date-picker.dart';
+import '../../../fragments/form/time-picker.dart';
 import '../../../fragments/messages.dart';
+import '../../../fragments/form/user-picker.dart';
+import '../../../fragments/form/field2.dart';
+
+import '../../../api/create.dart';
 
 class TeacherPassForm extends StatefulWidget {
   CurrentUserModel user;
@@ -24,70 +23,32 @@ class TeacherPassForm extends StatefulWidget {
 }
 
 class TeacherPassFormState extends State<TeacherPassForm> {
-  final dateFormat = DateFormat("EEEE, MMMM d, yyyy");
-  final timeFormat = DateFormat.jm();
+ 
+
   CurrentUserModel user;
 
-  UserModel originTeacher;
-  UserModel destinationTeacher;
-  UserModel student;
+  MyDatePicker date = new MyDatePicker("Date");
+  MyTimePicker startTime = new MyTimePicker("Start Time");
+  MyTimePicker endTime = new MyTimePicker("End Time");
+  MyField2 description =  new MyField2("Description", 8);
 
-  DateTime date;
-  String session;
-  String description;
-
-  ButtonField originTeacherField;
-  ButtonField destinationTeacherField;
-  ButtonField studentField; 
-
-  Function function;
+  UserPicker originTeacher;
+  UserPicker destinationTeacher;
+  UserPicker student; 
 
   TeacherPassFormState(CurrentUserModel user) {
     this.user = user;
 
-    function = ((int value) {
-      session = (value+1).toString();
-    });
+    originTeacher = new UserPicker(user, 'Origin Teacher', '2');
+    destinationTeacher = new UserPicker(user, 'Destination Teacher', '2');
     
-    originTeacherField = new ButtonField(
-      "Origin Teacher", 
-      () async {
-        originTeacher = await Navigator.push(context, MaterialPageRoute(builder: (context) => new UserSearch(user, '2')));
-        originTeacherField.state.setState(() {
-          originTeacherField.state.text = originTeacher == null ? "Origin Teacher" : "Origin Teacher: " + originTeacher.getName(); 
-
-        });        
-      },
-    );
-    destinationTeacherField = new ButtonField(
-      "Destination Teacher", 
-      () async {
-        destinationTeacher = await Navigator.push(context, MaterialPageRoute(builder: (context) => new UserSearch(user, '2')));
-        destinationTeacherField.state.setState(() {
-          destinationTeacherField.state.text = destinationTeacher == null ? "Destination Teacher" : "Destination Teacher: " + destinationTeacher.getName(); 
-
-        });        
-      },
-    );
-
-    if (user.type == '1') {
-      student = user as UserModel;
-    } else if (user.type == '2') {
-      studentField = new ButtonField(
-        "Student", 
-        () async {
-          student = await Navigator.push(context, MaterialPageRoute(builder: (context) => new UserSearch(user, '1')));
-          studentField.state.setState(() {
-            studentField.state.text = student == null ? "Student" : "Student: " + student.getName(); 
-
-          });        
-        },
-      );
+    if (user.type == '2') { // create student field if the current user isn't a student
+      student = new UserPicker(user, 'Student', '1');
     }
   }
 
-  SRTPassModel getData() { 
-    return new SRTPassModel(date, student, originTeacher, description, destinationTeacher, session);
+  PassModel getData() {
+    return new TeacherPassModel(date.getValue(), startTime.getValue(), endTime.getValue(), student == null ? user : student.getValue(), originTeacher.getValue(), description.getValue(), destinationTeacher.getValue());
   }
 
   @override
@@ -103,37 +64,12 @@ class TeacherPassFormState extends State<TeacherPassForm> {
               child: Form(
                 child: new Column(
                   children: <Widget>[
-                    studentField != null ? studentField : new Container(),
-                    originTeacherField, 
-                    destinationTeacherField, 
-                    new DateTimePickerFormField(
-                      format: dateFormat,
-                      enabled: true,
-                      onChanged: (value) {
-                        date = value;
-                      },
-
-                      decoration: new InputDecoration(
-                        hintText: 'Day',         
-                        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blue))                 
-                      )
-                    ),
-
-                    new Container(
-                      width: 20000.0,
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: new Dropdown(["First Session", "Second Session", "Both Sessions"], function),
-                    ),
-
-                    new TextField(
-                      maxLines: 8,
-                      onChanged: (value) {
-                        description = value;
-                      },
-                      decoration: new InputDecoration(
-                        hintText: 'Description',    
-                      )
-                    )
+                    student != null ? student : new Container(),
+                    originTeacher, 
+                    destinationTeacher, 
+                    startTime,
+                    endTime,
+                    description
                   ],
                 )
               ),
@@ -145,13 +81,14 @@ class TeacherPassFormState extends State<TeacherPassForm> {
             margin: EdgeInsets.only(top: 1.25, bottom: 2.5),
             width: 3000.0,
             child: new RaisedButton(
-              onPressed: () {
-                print("tet");
-
-                if (date != null && student != null && originTeacher != null && description != null && destinationTeacher != null && session != null) {
-                  SRTPassModel pass = getData();
+              onPressed: () async {
+                // give error if all fields aren't filled in
+                if ((student == null || student.isEmpty()) || originTeacher.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || description.isEmpty() || destinationTeacher.isEmpty()) {
+                  Messages.error("Must fill all fields", context);
                 } else {
-                  Messages.message("Must fill all fields", context);
+                  // otherwise create an object
+                  TeacherPassModel pass = getData();
+                  Map<String, dynamic> response = await CreatePassAPI().getData(pass, pass.type);
                 }
               },
               color: Colors.white,
