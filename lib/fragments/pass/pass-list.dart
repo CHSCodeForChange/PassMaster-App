@@ -41,19 +41,21 @@ class PassListState extends State<PassList> {
   Widget build(BuildContext context) {
     if (passes == null) {
       return new Column(
-        children: <Widget>[new Container(
-          height: 600.0, // force card to take up full space
-          width: 600.0,
-          alignment: FractionalOffset.center,
-          child: new SizedBox(
-            width: 75.0,
-            height: 75.0,
-            child: new CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 5.0,
-            ),
+        children: <Widget>[
+          new Expanded(
+            child: new Container(
+              alignment: FractionalOffset.center,
+              child: new SizedBox(
+                width: 75.0,
+                height: 75.0,
+                child: new CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                  strokeWidth: 5.0,
+                ),
+              )
+            )
           )
-        )]
+        ]
       );
     }
     return new ListView.builder(
