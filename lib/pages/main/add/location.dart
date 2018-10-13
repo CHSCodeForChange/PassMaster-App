@@ -53,6 +53,16 @@ class LocationPassFormState extends State<LocationPassForm> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgets = [
+      student != null ? student : new Container(),
+      originTeacher, 
+      location, 
+      date,
+      startTime,
+      endTime,
+      description
+    ];
+
     return new Column(
       children: <Widget>[
         new Expanded (
@@ -60,20 +70,17 @@ class LocationPassFormState extends State<LocationPassForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
             child: new Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10.0),
-              child: Form(
-                child: new Column(
-                  children: <Widget>[
-                    student != null ? student : new Container(),
-                    originTeacher, 
-                    location, 
-                    date,
-                    startTime,
-                    endTime,
-                    description
-                  ],
-                )
-              ),
+              padding: EdgeInsets.only(left:10.0, right:10.0),
+              child: new Container(
+                alignment: Alignment.topLeft,
+                child: ListView.builder(
+                  padding: EdgeInsets.all(0.0),
+                  itemCount: widgets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return widgets[index];
+                  }
+                ),       
+              )
             ),
           ),
         ),
