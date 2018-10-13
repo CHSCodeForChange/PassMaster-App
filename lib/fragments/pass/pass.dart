@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pass_master/api/pass.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../models/pass.dart';
 import '../../models/datetime.dart';
 import '../../models/currentuser.dart';
@@ -95,11 +96,14 @@ class PassState extends State<Pass> {
     Row titleRow = new Row(
       children: <Widget>[
         new Container(child: pass.getIcon(), padding: EdgeInsets.all(10.0),),
-        new Text(
-          pass.getName(),
-          textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
-        ),
+        new Expanded(
+          child: new AutoSizeText(
+            pass.getName(),
+            textAlign: TextAlign.left,
+            maxLines: 1,
+            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+          ),
+        )
       ],
     );
     
@@ -107,13 +111,20 @@ class PassState extends State<Pass> {
     List<Widget> descriptors = [];
     TextStyle descriptorStyle = TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0);
     
-    descriptors.add(new Row(children: <Widget>[new Text("Origin Teacher: " + (pass?.originTeacher?.getName() ?? ""), style: descriptorStyle)],));
+    descriptors.add(new Row(children: <Widget>[new Expanded(child: 
+      new AutoSizeText("Origin Teacher: " + (pass?.originTeacher?.getName() ?? ""), maxLines: 1, style: descriptorStyle)
+    )],));
+
     if(pass.timeLeftOrigin != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Left Origin: " + MyDateTime.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
+      descriptors.add(new Row(children: <Widget>[new Expanded(child:
+        new AutoSizeText("Left Origin: " + MyDateTime.getTime(pass.timeLeftOrigin), maxLines: 1, style: descriptorStyle)
+      ),],));
      MyDateTime.getTime(pass.timeLeftOrigin);
     }
     if(pass.timeArrivedDestination != null) {
-      descriptors.add(new Row(children: <Widget>[new Text("Arrived Destination: " + MyDateTime.getTime(pass.timeLeftOrigin), style: descriptorStyle),],));
+      descriptors.add(new Row(children: <Widget>[new Expanded(child:
+        new AutoSizeText("Arrived Destination: " + MyDateTime.getTime(pass.timeLeftOrigin), maxLines: 1, style: descriptorStyle)
+      ),],));
     }
 
     // Initialize sign in and out buttons
@@ -202,8 +213,9 @@ class PassState extends State<Pass> {
             ),
             new Container(
               alignment: Alignment.bottomLeft,
-              child: new Text(
+              child: new AutoSizeText(
                 this.pass.getDateDuration(),
+                maxLines: 1,
                 style: TextStyle(color: Colors.grey, fontSize: 20.0),
               ),
             ),
