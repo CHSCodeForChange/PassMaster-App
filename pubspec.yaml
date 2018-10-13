@@ -24,13 +24,19 @@ dependencies:
   
   intl: 
   datetime_picker_formfield:  
+  flutter_launcher_icons: "^0.6.1"
+  
+flutter_icons:
+  android: true 
+  ios: "Example-Icon"
+  image_path: "assets/icon/icon.png"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 
-# For information on the generic Dart part of this file, see the
+# For information on the generic Dart part of this fileflut, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
