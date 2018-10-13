@@ -38,7 +38,7 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() => {
-    "pk": pk,
+    "pk": pk.toString(),
     "username": username,
     "first_name": firstname,
     "last_name": lastname,

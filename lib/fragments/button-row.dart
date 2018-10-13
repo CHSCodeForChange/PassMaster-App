@@ -25,7 +25,6 @@ class ButtonRowState extends State<ButtonRow> {
                 setState(() {
                   this.value = i;          
                 });
-                print(this.value);
               },
               color: this.value == i ? Colors.white : Colors.grey,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),

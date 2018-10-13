@@ -1,7 +1,9 @@
-import './user.dart';
-import './pass.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+
+import './user.dart';
+import './pass.dart';
+import 'datetime.dart';
 
 class LocationPassModel extends PassModel {
   String location;
@@ -27,13 +29,13 @@ class LocationPassModel extends PassModel {
 
   Map<String, dynamic> toJson() =>
     {
-      'date' : date, 
-      'student' : student.pk, 
-      'originTeacher' : originTeacher.pk,
+      'date' : MyDateTime.getDateJson(date), 
+      'student' : student.pk.toString(), 
+      'originTeacher' : originTeacher.pk.toString(),
       'description' : description, 
       'location' : location,
-      'startTimeRequested': startTimeRequested,
-      'endTimeRequested': endTimeRequested,
+      'startTimeRequested': MyDateTime.getTimeJson(startTimeRequested),
+      'endTimeRequested': MyDateTime.getTimeJson(endTimeRequested),
     };
 
   @override 

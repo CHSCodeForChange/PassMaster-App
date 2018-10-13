@@ -12,6 +12,7 @@ import '../../../fragments/form/user-picker.dart';
 import '../../../fragments/form/field2.dart';
 
 import '../../../api/create.dart';
+import '../passes/view-pass.dart';
 
 class TeacherPassForm extends StatefulWidget {
   CurrentUserModel user;
@@ -67,6 +68,7 @@ class TeacherPassFormState extends State<TeacherPassForm> {
                     student != null ? student : new Container(),
                     originTeacher, 
                     destinationTeacher, 
+                    date,
                     startTime,
                     endTime,
                     description
@@ -83,12 +85,13 @@ class TeacherPassFormState extends State<TeacherPassForm> {
             child: new RaisedButton(
               onPressed: () async {
                 // give error if all fields aren't filled in
-                if ((student == null || student.isEmpty()) || originTeacher.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || description.isEmpty() || destinationTeacher.isEmpty()) {
+                if ((student != null && student.isEmpty()) || originTeacher.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || description.isEmpty() || destinationTeacher.isEmpty()) {
                   Messages.error("Must fill all fields", context);
                 } else {
                   // otherwise create an object
                   TeacherPassModel pass = getData();
-                  Map<String, dynamic> response = await CreatePassAPI().getData(pass, pass.type);
+                  pass = await CreatePassAPI().getData(user.token, pass);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => new ViewPass(user, pass)));
                 }
               },
               color: Colors.white,

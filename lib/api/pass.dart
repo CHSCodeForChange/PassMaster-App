@@ -27,7 +27,7 @@ class PassAPI extends API {
       }
     );
 
-    // print(response.body);
+    print(response.body);
 
     PassModel pass;
     Map<String, dynamic> data = json.decode(response.body);

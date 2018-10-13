@@ -16,8 +16,10 @@ class MyField2 extends StatelessWidget {
     return new TextField(
       maxLines: lines,
       onChanged: (value) {
-        value = value;
+        this.value = value;
       },
+      cursorColor: Colors.grey,
+      style: TextStyle(color: Colors.grey, fontSize: 16.0),
       decoration: new InputDecoration(
         hintText: name,
       ),

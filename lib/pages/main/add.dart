@@ -24,7 +24,6 @@ class AddState extends State<Add> {
     setState(() {
       this.value = value;
     });
-    print(this.value);
   }
 
   TeacherPassForm teacherPassForm;

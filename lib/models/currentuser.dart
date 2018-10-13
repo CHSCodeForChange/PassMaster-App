@@ -16,5 +16,9 @@ class CurrentUserModel extends UserModel {
     this.token = token;
   }
 
+  UserModel getUser() {
+    return this as UserModel;
+  }
+
 
 }

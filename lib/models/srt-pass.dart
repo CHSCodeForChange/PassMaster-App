@@ -77,15 +77,15 @@ class SRTPassModel extends PassModel {
   Map<String, dynamic> toJson() =>
     {
       'date' : MyDateTime.getDateJson(date), 
-      'student' : student.pk, 
-      'originTeacher' : originTeacher.toJson(),
+      'student' : student.pk.toString(), 
+      'originTeacher' : originTeacher.pk.toString(),
       'description' : description, 
-      'destinationTeacher' : destinationTeacher.toJson(),
+      'destinationTeacher' : destinationTeacher.pk.toString(),
       'session': session
     };
 
   SRTPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
-    this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);
+    this.destinationTeacher = UserModel.fromJson(json['destinationTeacher_info']);
     this.session = json['session'];
   }
 }

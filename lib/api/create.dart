@@ -9,35 +9,37 @@ import '../models/teacher-pass.dart';
 import '../models/pass.dart';
 
 class CreatePassAPI extends API {
-  Future<Map<String, dynamic>> getData(PassModel pass, String type) async {
-    String url = this.baseUrl + 'create/?format=json&type=';
+  Future<PassModel> getData(String token, PassModel pass) async {
+    String url = this.baseUrl + 'passes/create/?format=json&type=';
 
-    Map<String, dynamic> data;
+    Map<dynamic, dynamic> data;
     
-    if (type=="LocationPass") {
+    if (pass.type=="LocationPass") {
       data = (pass as LocationPassModel).toJson();
-    } else if (type == "TeacherPass") {
+    } else if (pass.type == "TeacherPass") {
       data = (pass as TeacherPassModel).toJson();
-    } else if (type == "SRTPass") {
+    } else if (pass.type == "SRTPass") {
       data = (pass as SRTPassModel).toJson();
     }
 
-    url += type;
-
-    print(url);
-    print(data);
+    url += pass.type;
 
     var response = await http.post(
       Uri.encodeFull(url),
-      body: data
+      body: data,
+      headers: {
+        "Authorization": token, 
+      }
     );
 
-    print(response.body);
-
-    if (json.decode(response.body)['non_field_errors'] != null) {
-      throw(json.decode(response.body)['non_field_errors'][0]);
+    if (pass.type=="LocationPass") {
+      pass = LocationPassModel.fromJson(json.decode(response.body));
+    } else if (pass.type == "TeacherPass") {
+      pass = TeacherPassModel.fromJson(json.decode(response.body));
+    } else if (pass.type == "SRTPass") {
+      pass = SRTPassModel.fromJson(json.decode(response.body));
     }
-    
-    return json.decode(response.body);
+
+    return pass;
   }
 }

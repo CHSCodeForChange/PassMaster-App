@@ -10,14 +10,16 @@ class UserListAPI extends API {
     String url = this.baseUrl + 'users/?format=json';
 
     if (type != null) {
-      url += '&type=' + type;
+      if (type == '1') {
+        url = this.baseUrl + 'students/?format=json';
+      } else if (type == '2') {
+        url = this.baseUrl + 'teachers/?format=json';
+      }
     }
     
     if (username != null) {
       url += '&username=' + username;
     }
-
-    print(url);
 
     var response = await http.get(
       Uri.encodeFull(url),

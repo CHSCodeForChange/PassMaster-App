@@ -64,8 +64,8 @@ class PassModel {
     endTimeRequested = MyDateTime.parseTime(json['endTimeRequested']);
     timeLeftOrigin = MyDateTime.parseTime(json['timeLeftOrigin']);
     timeArrivedDestination = MyDateTime.parseTime(json['timeArrivedDestination']);
-    student = UserModel.fromJson(json['student']);
-    originTeacher = UserModel.fromJson(json['originTeacher']);
+    student = UserModel.fromJson(json['student_info']);
+    originTeacher = UserModel.fromJson(json['originTeacher_info']);
     description = json['description']; 
     type = json['type'];
     destination = json['destination'];

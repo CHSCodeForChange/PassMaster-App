@@ -1,7 +1,9 @@
-import './user.dart';
-import './pass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import './user.dart';
+import './pass.dart';
+import 'datetime.dart';
 
 
 class TeacherPassModel extends PassModel {
@@ -18,23 +20,23 @@ class TeacherPassModel extends PassModel {
   ) 
   :super(date, startTimeRequested, endTimeRequested,
     student, originTeacher,
-    description, "LocationPass", destinationTeacher.getName()) {
+    description, "TeacherPass", destinationTeacher.getName()) {
       this.destinationTeacher = destinationTeacher;
   }
 
   TeacherPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
-    this.destinationTeacher = UserModel.fromJson(json['destinationTeacher']);
+    this.destinationTeacher = UserModel.fromJson(json['destinationTeacher_info']);
   }
 
-  Map<String, dynamic> toJson() =>
+  Map<dynamic, dynamic> toJson() =>
     {
-      'date' : date, 
-      'student' : student.pk, 
-      'originTeacher' : originTeacher.pk,
+      'date' : MyDateTime.getDateJson(date), 
+      'student' : student.pk.toString(), 
+      'originTeacher' : originTeacher.pk.toString(),
       'description' : description, 
-      'destinationTeacher' : destinationTeacher,
-      'startTimeRequested': startTimeRequested,
-      'endTimeRequested': endTimeRequested,
+      'destinationTeacher' : destinationTeacher.pk.toString(),
+      'startTimeRequested': MyDateTime.getTimeJson(startTimeRequested),
+      'endTimeRequested': MyDateTime.getTimeJson(endTimeRequested),
     };
 
   @override 

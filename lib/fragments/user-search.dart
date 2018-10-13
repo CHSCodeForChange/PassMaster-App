@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'dart:async';
 import '../models/currentuser.dart';
 import '../models/user.dart';
-import '../api/user_search.dart';
+import '../api/user-search.dart';
 
 class UserSearch extends StatefulWidget {
   CurrentUserModel user;
@@ -28,7 +28,6 @@ class UserSearchState extends State<UserSearch> {
   }
 
   Future<void> getData(String username) async {
-    print(username);
     Iterable<UserModel> tempUsers = await UserListAPI().getData(user.token, type, username);
     setState(() {
       users = tempUsers;

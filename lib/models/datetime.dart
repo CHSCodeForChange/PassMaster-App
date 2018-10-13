@@ -62,4 +62,8 @@ class MyDateTime {
       return hour + ":" + minute + " " + ampm;
     }
   }
+
+  static String getTimeJson(TimeOfDay time) {
+    return time != null ? time.hour.toString() + ":" + time.minute.toString() : "";
+  }
 }
