@@ -21,7 +21,7 @@ class Passes extends StatelessWidget {
             ];
     } else if (user.type == '2') {
       return [
-        Tab(text: 'Incomming'),
+        Tab(text: 'Incoming'),
         Tab(text: 'Outgoing'),
         Tab(text: 'Pending'),
         Tab(text: 'Old'),
@@ -38,7 +38,7 @@ class Passes extends StatelessWidget {
             ];
     } else if (user.type == '2') {
       return [
-        new GenericPasses(user, 'teacher-incomming'),
+        new GenericPasses(user, 'teacher-incoming'),
         new GenericPasses(user, 'teacher-outgoing'),
         new GenericPasses(user, 'teacher-pending'),
         new GenericPasses(user, 'teacher-old'),

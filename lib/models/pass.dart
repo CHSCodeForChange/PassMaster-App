@@ -12,6 +12,9 @@ class PassModel {
   String description;
   String type;
   String destination;
+  bool canApprove;
+  bool canSignIn;
+  bool canSignOut;
   
   PassModel(
     this.date,
@@ -69,6 +72,9 @@ class PassModel {
     description = json['description']; 
     type = json['type'];
     destination = json['destination'];
+    canApprove = json['can_approve'];
+    canSignIn = json['can_sign_in'];
+    canSignOut = json['can_sign_out'];
   }
 
   String getDuration() {

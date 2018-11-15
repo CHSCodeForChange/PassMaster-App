@@ -48,20 +48,42 @@ class PassState extends State<Pass> {
 
   Future<void> signIn() async {
     Messages.message("Signing In", context);
-    await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signin");
-    pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
-    setState((){
-      pass = pass;
-    });
+    try{
+      await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signin");
+      pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
+      setState((){
+        pass = pass;
+      });
+    } catch(e) {
+      Messages.error("Error signing in", context);
+    }
   }
 
   Future<void> signOut() async {
     Messages.message("Signing Out", context);
-    await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signout");
-    pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
-    setState((){
-      pass = pass;
-    });
+    try{
+      await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "signout");
+      pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
+      setState((){
+        pass = pass;
+      });
+    } catch(e) {
+      Messages.error("Error signing out", context);
+    }
+  }
+
+  Future<void> approve() async {
+    Messages.message("Approving", context);
+    try {
+      await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "approve");
+      pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
+      setState((){
+        pass = pass;
+      });
+    } catch(e) {
+      Messages.error("Error approving", context);
+    }
+
   }
 
   @override
@@ -127,7 +149,7 @@ class PassState extends State<Pass> {
       ),],));
     }
 
-    // Initialize sign in and out buttons
+    // Initialize approve signin, and signout buttons
     RaisedButton signInButton = new RaisedButton(
       color: Colors.blueAccent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -160,10 +182,34 @@ class PassState extends State<Pass> {
       )
     );
 
+    RaisedButton approveButton = new RaisedButton(
+      color: Colors.blueAccent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      onPressed: () {
+        approve();
+      },
+      child: new Container(
+        width: 500.0,
+        child: new Text(
+          "Approve",
+          style: new TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
+      )
+    );
+
     Expanded actionButtons;
     // If the user is a teacher, show correct buttons
     if (this.user.type == "2") {
-      if (pass.timeLeftOrigin == null) {
+      if (pass.canApprove) {
+        actionButtons = new Expanded(
+          child: new Container(
+            alignment: FractionalOffset.bottomCenter,
+            child: approveButton,
+          ),
+        );
+      }
+      else if (pass.canSignOut) {
         actionButtons = new Expanded(
           child: new Container(
             alignment: FractionalOffset.bottomCenter,
@@ -171,7 +217,7 @@ class PassState extends State<Pass> {
           ),
         );
       }
-      else if (pass.timeArrivedDestination == null) {
+      else if (pass.canSignIn) {
         actionButtons = new Expanded(
           child: new Container(
             alignment: FractionalOffset.bottomCenter,
