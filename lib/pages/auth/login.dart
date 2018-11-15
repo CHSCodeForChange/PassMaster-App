@@ -5,6 +5,7 @@ import '../main/main.dart';
 import './signup.dart';
 import '../../api/login.dart';
 import '../../models/currentuser.dart';
+import '../../models/storage.dart';
 import '../../fragments/form/field.dart';
 import '../../fragments/button.dart';
 import '../../fragments/messages.dart';
@@ -37,6 +38,7 @@ class LoginBody extends StatelessWidget {
       CurrentUserModel user;
       try {
         user = await LoginAPI().getData(username.value, password.value);
+        Storage().storeUser(user);
         Messages.message("Logging in...", context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));     
       } catch (e) {

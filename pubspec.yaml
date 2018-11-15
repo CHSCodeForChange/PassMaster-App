@@ -18,6 +18,8 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   auto_size_text:
+  shared_preferences:
+  http:
   intl: 
   datetime_picker_formfield:  
   flutter_launcher_icons: "^0.6.1"
