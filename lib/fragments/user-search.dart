@@ -39,7 +39,7 @@ class UserSearchState extends State<UserSearch> {
     return new Material(
       color: Colors.orangeAccent,
       child: Container(
-        margin: EdgeInsets.all(15.0),
+        margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 16.0),
         child: new Column(
           children: <Widget>[
             new Row(
@@ -57,7 +57,7 @@ class UserSearchState extends State<UserSearch> {
                   child: new Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                     child: new Container(
-                      padding: EdgeInsets.all(15.0),
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 10.0),
                       child: new TextField(
                         onChanged: (text) => getData(text),
                         decoration: InputDecoration(

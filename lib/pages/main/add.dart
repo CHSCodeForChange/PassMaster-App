@@ -51,14 +51,19 @@ class AddState extends State<Add> {
         children: <Widget>[
           new Container(
             width: double.infinity,
-            child: new Container(
-              margin: EdgeInsets.only(bottom: 1.25),
+            child: new Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Colors.white,
+              ),
               child: new Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(200.0)),
+                margin: EdgeInsets.only(top: 16.0, bottom: 1.25),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                 child: new Container(
-                  color: Colors.white,
                   padding: EdgeInsets.all(16.0),
-                  child: new Dropdown(["Teacher", "Location", "SRT"], function: function)
+                  child: new Dropdown(
+                    ["Teacher", "Location", "SRT"],
+                    function: function,
+                  )
                 ),
               ),
             ),

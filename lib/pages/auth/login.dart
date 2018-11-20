@@ -8,6 +8,8 @@ import '../../models/currentuser.dart';
 import '../../fragments/form/field.dart';
 import '../../fragments/button.dart';
 import '../../fragments/messages.dart';
+import 'package:flutter/services.dart';
+
 
 class Login extends StatelessWidget {
   @override
@@ -47,6 +49,10 @@ class LoginBody extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.orangeAccent,
+      statusBarColor: Colors.transparent,
+    ));
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
