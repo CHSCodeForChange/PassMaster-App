@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MyDateTime {
-  static String getDate(date) {
-    return getMonthName(date.month) + " " + date.day.toString() + ", " + date.year.toString();
+  static String getDate(date, {showYear: false, shortenedMonths: false}) {
+    return getMonthName(date.month, shortened: shortenedMonths) + " " + date.day.toString() + (showYear ? ", " + date.year.toString() : "");
   }
 
   static String getDateJson(date) {
     return date.year.toString() + "-" + date.month.toString() + "-" + date.day.toString();
   }
 
-  static String getMonthName(int month) {
+  static String getMonthName(int month, {shortened: false}) {
+    if(shortened){
+      month += 12;
+    }
     switch(month) {
       case 1:
         return "January";
@@ -35,6 +38,30 @@ class MyDateTime {
         return "November";
       case 12:
         return "December";
+      case 13:
+        return "Jan";
+      case 14:
+        return "Feb";
+      case 15:
+        return "Mar";
+      case 16:
+        return "Apr";
+      case 17:
+        return "May";
+      case 18:
+        return "Jun";
+      case 19:
+        return "Jul";
+      case 20:
+        return "Aug";
+      case 21:
+        return "Sep";
+      case 22:
+        return "Oct";
+      case 23:
+        return "Nov";
+      case 24:
+        return "Dec";
     }
   }
 
@@ -52,15 +79,22 @@ class MyDateTime {
     return parsedTime;
   }
 
-  static String getTime(TimeOfDay time) {
+  static String getTime(TimeOfDay time, {withAMPM: true}) {
     if (time == null) {
       return "";
     } else {
       String hour = (time.hour%12 == 0 ? 12 : time.hour%12).toString();
       String minute =(time.minute > 10 ? "" : "0") + time.minute.toString();
       String ampm = time.hour >= 12 ? "PM" : "AM";
-      return hour + ":" + minute + " " + ampm;
+      return hour + ":" + minute + (withAMPM ? " " + ampm : "");
     }
+  }
+
+  static bool isPM(TimeOfDay time) {
+    if(time == null) {
+      return null;
+    }
+    return time.hour >= 12;
   }
 
   static String getTimeJson(TimeOfDay time) {

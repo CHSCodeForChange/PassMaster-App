@@ -10,27 +10,17 @@ class PassMini extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Icon icon;
-    if(pass.type == "SRTPass") {
-      icon = new Icon(Icons.hourglass_full);
-    }
-    else if(pass.type == "LocationPass") {
-      icon = new Icon(Icons.location_on);
-    }
-    else if(pass.type == "TeacherPass") {
-      icon = new Icon(Icons.person);
-    }
     return new Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: new Container(
-        padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
+        padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 20.0, right: 20.0),
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Row(
               children: <Widget>[
                 new Container(
-                  child: icon,
+                  child: this.pass.getIcon(childIcon: true),
                   padding: EdgeInsets.only(right: 10.0),
                 ),
                 new Text(
@@ -41,7 +31,7 @@ class PassMini extends StatelessWidget {
             ),
 
             new Text(
-              pass.getDateDuration(),
+              pass.getDateDuration(showYear: false, shortenedMonths: true),
               style: TextStyle(fontSize: 17.0),
             )
           ],

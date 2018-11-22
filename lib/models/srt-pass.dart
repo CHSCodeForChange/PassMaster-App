@@ -24,7 +24,7 @@ class SRTPassModel extends PassModel {
   }
 
   @override 
-  String getDateDuration() {
+  String getDateDuration({showYear: true, shortenedMonths: false}) {
     return MyDateTime.getDate(date) + ", Session: " + getSession();
   }
 
@@ -34,7 +34,7 @@ class SRTPassModel extends PassModel {
   }
 
   @override
-  Icon getIcon() {
+  Icon getIcon({childIcon: false}) {
     return Icon(Icons.hourglass_full);
   }
 

@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import './add.dart';
 import './home.dart';
 import './passes.dart';
-import '../../models/currentuser.dart'; 
+import '../../models/currentuser.dart';
+import 'package:flutter/services.dart';
+
 
 class Main extends StatefulWidget {
   CurrentUserModel user;
@@ -78,18 +80,25 @@ class MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.orangeAccent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+    ));
     return Theme(
       data: ThemeData(
         scaffoldBackgroundColor: Colors.orangeAccent,
         primaryColor: Colors.orangeAccent,
         accentColor: Colors.orangeAccent,
+        canvasColor: Colors.orangeAccent,
+        buttonColor: Colors.white,
       ),
       child: Scaffold(
-
-        bottomNavigationBar: BottomNavigationBar( 
+        bottomNavigationBar: BottomNavigationBar(
           currentIndex: index, 
           onTap: onTabTapped,
           items: bar,
+          fixedColor: Colors.white,
         ),
 
         body: pages[index],

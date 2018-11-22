@@ -29,5 +29,10 @@ class Messages {
       )
     );
   }
+
+  static void clear(BuildContext context) {
+      final scaffold = Scaffold.of(context);
+      scaffold.hideCurrentSnackBar();
+  }
   
 }

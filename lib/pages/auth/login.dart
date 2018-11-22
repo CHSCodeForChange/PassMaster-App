@@ -9,6 +9,8 @@ import '../../models/storage.dart';
 import '../../fragments/form/field.dart';
 import '../../fragments/button.dart';
 import '../../fragments/messages.dart';
+import 'package:flutter/services.dart';
+
 
 class Login extends StatelessWidget {
   @override
@@ -23,6 +25,7 @@ class Login extends StatelessWidget {
 class LoginBody extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   MyField username, password;
+  bool loggingIn = false;
 
 
   LoginBody () {
@@ -32,23 +35,30 @@ class LoginBody extends StatelessWidget {
 
 
   void login(BuildContext context) async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate() && !loggingIn) {
+      loggingIn = true;
       _formKey.currentState.save();
 
       CurrentUserModel user;
       try {
-        user = await LoginAPI().getData(username.value, password.value);
-        Storage().storeUser(user);
         Messages.message("Logging in...", context);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));     
+        user = await LoginAPI().getData(username.value, password.value);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));
+        Messages.clear(context);
+        this._formKey.currentState.reset();
       } catch (e) {
         Messages.error(e.toString(), context);
-      }           
-    }   
+      }
+      loggingIn = false;
+    }
   }
  
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.orangeAccent,
+      statusBarColor: Colors.transparent,
+    ));
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
