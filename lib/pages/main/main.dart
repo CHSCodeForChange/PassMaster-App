@@ -48,6 +48,7 @@ class MainState extends State<Main> {
     } else if (user.type == '2') {
        pages = [
         new Add(user),
+        new Home(user),
         new Passes(user)
       ];
       
@@ -55,6 +56,10 @@ class MainState extends State<Main> {
             BottomNavigationBarItem(
               icon: new Icon(Icons.add),
               title: new Text('Add'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.home),
+              title: new Text('Home'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.dashboard),
