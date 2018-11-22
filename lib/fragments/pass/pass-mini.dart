@@ -11,7 +11,7 @@ class PassMini extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
       child: new Container(
         padding: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 20.0, right: 20.0),
         child: new Column(

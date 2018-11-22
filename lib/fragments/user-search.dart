@@ -44,67 +44,52 @@ class UserSearchState extends State<UserSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
-      color: Colors.orangeAccent,
-      child: Container(
-        margin: EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0, bottom: 16.0),
-        child: new Column(
-          children: <Widget>[
-            new Row(
-              children: <Widget>[
-                new Container(
-                  child: new IconButton(
-                    color: Colors.white,
-                     icon: Icon(Icons.arrow_back),
-                     onPressed: () {
-                       Navigator.pop(context);
-                     },
-                  )
-                ),
-                new Expanded(
-                  child: new Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                    child: new Container(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
-                      child: new TextField(
-                        onChanged: (text) => getData(text),
-                        decoration: InputDecoration.collapsed(
-                          hintText: hintText,
-                        ),
-                      ),
-                    ),
-                  )
-                )
-              ],
-            ),
-            new Flexible(
-              child: ListView.builder(
-                itemCount: users == null ? 0 : users.length,
-                itemExtent: 75.0,
-                itemBuilder: (BuildContext context, int index) {
-                  return new GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context, users.elementAt(index));
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
-                      child: new Container(
-                        alignment: Alignment(0.0, 0.0),
-                        child: new Text(
-                          users.elementAt(index).getName(),
-                          style: TextStyle(fontSize: 25.0),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+    return new Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
+        title: new Card(
+          color: Colors.orangeAccent,
+          elevation: 0.0,
+          shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          child: new Container(
+            padding: EdgeInsets.all(5.0),
+            child: new TextField(
+              onChanged: (text) => getData(text),
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
+              cursorColor: Colors.white,
+              decoration: InputDecoration.collapsed(
+                hintText: hintText,
+                hintStyle: TextStyle(fontSize: 20.0, color: Colors.white),
               ),
             )
-          ],
+          ),
         )
       ),
-
+      body: new Container(
+        color: Colors.orangeAccent,
+        padding: EdgeInsets.all(10.0),
+        child: ListView.builder(
+          itemCount: users == null ? 0 : users.length,
+          itemExtent: 75.0,
+          itemBuilder: (BuildContext context, int index) {
+            return new GestureDetector(
+              onTap: () {
+                Navigator.pop(context, users.elementAt(index));
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                child: new Container(
+                  alignment: Alignment(0.0, 0.0),
+                  child: new Text(
+                    users.elementAt(index).getName(),
+                    style: TextStyle(fontSize: 25.0),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      )
     );
   }
-
 }
