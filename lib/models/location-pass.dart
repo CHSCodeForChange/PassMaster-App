@@ -44,7 +44,7 @@ class LocationPassModel extends PassModel {
   }
 
   @override
-  Icon getIcon() {
+  Icon getIcon({childIcon: false}) {
     return Icon(Icons.location_on);
   }
 }

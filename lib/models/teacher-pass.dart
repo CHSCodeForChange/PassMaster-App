@@ -45,7 +45,7 @@ class TeacherPassModel extends PassModel {
   }
 
   @override
-  Icon getIcon() {
+  Icon getIcon({childIcon: false}) {
     return Icon(Icons.person);
   }
 }

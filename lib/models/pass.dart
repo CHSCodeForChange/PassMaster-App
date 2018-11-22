@@ -78,18 +78,37 @@ class PassModel {
   }
 
   String getDuration() {
-    return MyDateTime.getTime(startTimeRequested) + "-" + MyDateTime.getTime(endTimeRequested);
+    bool firstWithAMPM = true;
+    if(MyDateTime.isPM(startTimeRequested) == MyDateTime.isPM(endTimeRequested)) {
+      firstWithAMPM = false;
+    }
+    return MyDateTime.getTime(startTimeRequested, withAMPM: firstWithAMPM) + "-" + MyDateTime.getTime(endTimeRequested);
   }
 
-  String getDateDuration() {
-    return MyDateTime.getDate(date) + ", " + getDuration();
+  String getDateDuration({showYear: true, shortenedMonths: false}) {
+    return MyDateTime.getDate(date, showYear: showYear, shortenedMonths: shortenedMonths) + ", " + getDuration();
   }
 
   String getName() {
     return destination;
   }
 
-  Icon getIcon() {
-    return Icon(Icons.layers);
+  Icon getIcon({childIcon: false}) {
+    if(!childIcon) {
+      return Icon(Icons.layers);
+    }
+    if(type == "SRTPass") {
+      return new Icon(Icons.hourglass_full);
+    }
+    else if(type == "LocationPass") {
+      return new Icon(Icons.location_on);
+    }
+    else if(type == "TeacherPass") {
+      return new Icon(Icons.person);
+    }
+    else {
+      return Icon(Icons.error);
+    }
+
   }
 }

@@ -19,11 +19,19 @@ class UserSearchState extends State<UserSearch> {
   CurrentUserModel user;
   String type;
   Iterable<UserModel> users;
+  String hintText;
 
   UserSearchState(this.user, this.type);
 
   @override
   void initState() {
+    hintText = "Search Users";
+    if(type == "1") {
+      hintText = "Search Students";
+    }
+    else if(type == "2") {
+      hintText = "Search Teachers";
+    }
     getData(null);
   }
 
@@ -55,13 +63,13 @@ class UserSearchState extends State<UserSearch> {
                 ),
                 new Expanded(
                   child: new Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
                     child: new Container(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 10.0),
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
                       child: new TextField(
                         onChanged: (text) => getData(text),
-                        decoration: InputDecoration(
-                          hintText: "Search Users"
+                        decoration: InputDecoration.collapsed(
+                          hintText: hintText,
                         ),
                       ),
                     ),
@@ -79,7 +87,7 @@ class UserSearchState extends State<UserSearch> {
                       Navigator.pop(context, users.elementAt(index));
                     },
                     child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
                       child: new Container(
                         alignment: Alignment(0.0, 0.0),
                         child: new Text(
