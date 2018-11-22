@@ -40,6 +40,7 @@ class PassState extends State<Pass> {
   }
 
   Future<void> getPass() async {
+    originalPass = pass;
     pass = await PassAPI().getData(user?.token, originalPass?.pk, originalPass?.type, null);
     setState(() {
       pass = pass;

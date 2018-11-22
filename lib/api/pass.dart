@@ -10,7 +10,7 @@ import '../models/teacher-pass.dart';
 
 class PassAPI extends API {
   Future<PassModel> getData(String token, int pk, String type, String action) async {
-    String url = this.baseUrl + 'passes/' + pk.toString() + '?format=json';
+    String url = this.baseUrl + 'passes/' + pk.toString() + '/?format=json';
     
     if (type != null) {
       url += '&type=' + type;

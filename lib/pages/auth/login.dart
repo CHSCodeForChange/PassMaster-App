@@ -24,6 +24,7 @@ class Login extends StatelessWidget {
 class LoginBody extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   MyField username, password;
+  bool loggingIn = false;
 
 
   LoginBody () {
@@ -33,7 +34,8 @@ class LoginBody extends StatelessWidget {
 
 
   void login(BuildContext context) async {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate() && !loggingIn) {
+      loggingIn = true;
       _formKey.currentState.save();
 
       CurrentUserModel user;
@@ -45,7 +47,8 @@ class LoginBody extends StatelessWidget {
         this._formKey.currentState.reset();
       } catch (e) {
         Messages.error(e.toString(), context);
-      }           
+      }
+      loggingIn = false;
     }
   }
  
