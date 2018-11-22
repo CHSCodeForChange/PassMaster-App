@@ -88,17 +88,13 @@ class MainState extends State<Main> {
     return Theme(
       data: ThemeData(
         scaffoldBackgroundColor: Colors.orangeAccent,
-        primaryColor: Colors.orangeAccent,
-        accentColor: Colors.orangeAccent,
-        canvasColor: Colors.orangeAccent,
-        buttonColor: Colors.white,
       ),
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index, 
           onTap: onTabTapped,
           items: bar,
-          fixedColor: Colors.white,
+          fixedColor: Colors.orangeAccent,
         ),
 
         body: pages[index],

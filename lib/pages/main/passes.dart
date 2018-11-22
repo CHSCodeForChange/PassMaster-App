@@ -56,6 +56,8 @@ class Passes extends StatelessWidget {
         child: Scaffold(
           appBar: TabBar(
             labelColor: Colors.white,
+            indicatorColor: Colors.white,
+            indicatorWeight: 3.0,
             tabs: getTabs(),
           ),
 

@@ -68,10 +68,10 @@ class TeacherPassFormState extends State<TeacherPassForm> {
       children: <Widget>[
         new Expanded (
           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
             child: new Container(
               width: double.infinity,
-              padding: EdgeInsets.only(left:10.0, right:10.0),
+              padding: EdgeInsets.all(10.0),
               child: new Container(
                 alignment: Alignment.topLeft,
                 child: ListView.builder(
@@ -87,7 +87,7 @@ class TeacherPassFormState extends State<TeacherPassForm> {
         ),
       
         new Container(
-            margin: EdgeInsets.only(top: 1.25, bottom: 2.5),
+            margin: EdgeInsets.only(top: 1.25, bottom: 2.5, left: 4.0, right: 4.0),
             width: 3000.0,
             child: new RaisedButton(
               onPressed: () async {
@@ -102,7 +102,7 @@ class TeacherPassFormState extends State<TeacherPassForm> {
                 }
               },
               color: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               child: new Text('Submit'),
             ),
           ),

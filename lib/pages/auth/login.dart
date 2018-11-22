@@ -43,6 +43,7 @@ class LoginBody extends StatelessWidget {
       try {
         Messages.message("Logging in...", context);
         user = await LoginAPI().getData(username.value, password.value);
+        Storage().storeUser(user);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));
         Messages.clear(context);
         this._formKey.currentState.reset();

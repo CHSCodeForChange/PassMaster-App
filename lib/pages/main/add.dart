@@ -56,8 +56,8 @@ class AddState extends State<Add> {
                 canvasColor: Colors.white,
               ),
               child: new Card(
-                margin: EdgeInsets.only(top: 16.0, bottom: 1.25),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                margin: EdgeInsets.only(top: 16.0, bottom: 1.25, left: 4.0, right: 4.0),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                 child: new Container(
                   padding: EdgeInsets.all(16.0),
                   child: new Dropdown(
@@ -70,8 +70,7 @@ class AddState extends State<Add> {
           ),
           new Expanded(
             child: new Container(
-              margin: EdgeInsets.only(top: 1.25, bottom: 1.25),
-              padding: EdgeInsets.all(0.0),
+              margin: EdgeInsets.only(top: 5, bottom: 1.25),
               child: getForm()
             )
           ),
