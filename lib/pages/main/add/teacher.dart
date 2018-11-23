@@ -71,7 +71,7 @@ class TeacherPassFormState extends State<TeacherPassForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
             child: new Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(20.0),
               child: new Container(
                 alignment: Alignment.topLeft,
                 child: ListView.builder(
