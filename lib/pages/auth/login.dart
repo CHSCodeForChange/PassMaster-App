@@ -23,12 +23,13 @@ class Login extends StatelessWidget {
 }
 
 class LoginBody extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey;
   MyField username, password;
   bool loggingIn = false;
 
 
   LoginBody () {
+    _formKey = GlobalKey<FormState>();
     username = MyField('username', false);
     password = MyField('password', true);
   }
@@ -98,15 +99,15 @@ class LoginBody extends StatelessWidget {
                   login(context);
                 })
               ),
-              new Container(
-                margin: EdgeInsets.all(5.0),
-                child: new MyButton('Sign Up', () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Signup()),
-                  );  
-                })
-              ),
+              // new Container(
+              //   margin: EdgeInsets.all(5.0),
+              //   child: new MyButton('Sign Up', () {
+              //     Navigator.pushReplacement(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => Signup()),
+              //     );  
+              //   })
+              // ),
             ],
           ),
         ),

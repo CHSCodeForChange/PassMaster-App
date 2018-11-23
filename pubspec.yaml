@@ -23,6 +23,8 @@ dependencies:
   intl: 
   datetime_picker_formfield:  
   flutter_launcher_icons: "^0.6.1"
+  qr_flutter:
+  barcode_scan:
   
 flutter_icons:
   android: true  

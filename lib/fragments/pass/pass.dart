@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pass_master/api/pass.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
 import '../../models/pass.dart';
 import '../../models/datetime.dart';
 import '../../models/currentuser.dart';
 import '../messages.dart';
+import 'action-button.dart';
+import 'qr.dart';
 
 class Pass extends StatefulWidget {
   PassState state;
@@ -80,13 +83,18 @@ class PassState extends State<Pass> {
     try {
       await PassAPI().getData(user.token, originalPass.pk, originalPass.type, "approve");
       pass = await PassAPI().getData(user.token, originalPass.pk, originalPass.type, null);
-      setState((){
-        pass = pass;
-      });
+      if (mounted) {
+        setState((){
+          pass = pass;
+        });
+      }
     } catch(e) {
       Messages.error("Error approving", context);
     }
+  }
 
+  void qrcode() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => new QR(pass)));
   }
 
   @override
@@ -153,53 +161,10 @@ class PassState extends State<Pass> {
     }
 
     // Initialize approve signin, and signout buttons
-    RaisedButton signInButton = new RaisedButton(
-      color: Colors.blueAccent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      onPressed: () {
-        signIn();
-      },
-      child: new Container(
-        width: 500.0,
-        child: new Text(
-          "Sign in",
-          style: new TextStyle(color: Colors.white),
-          textAlign: TextAlign.center,
-        ),
-      )
-    );
-
-    RaisedButton signOutButton = new RaisedButton(
-      color: Colors.blueAccent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      onPressed: () {
-        signOut();
-      },
-      child: new Container(
-        width: 500.0,
-        child: new Text(
-          "Sign out",
-          style: new TextStyle(color: Colors.white),
-          textAlign: TextAlign.center,
-        ),
-      )
-    );
-
-    RaisedButton approveButton = new RaisedButton(
-      color: Colors.blueAccent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      onPressed: () {
-        approve();
-      },
-      child: new Container(
-        width: 500.0,
-        child: new Text(
-          "Approve",
-          style: new TextStyle(color: Colors.white),
-          textAlign: TextAlign.center,
-        ),
-      )
-    );
+    ActionButton approveButton = new ActionButton("Approve", approve);
+    ActionButton signInButton = new ActionButton("Sign In", signIn);
+    ActionButton signOutButton = new ActionButton("Sign Out", signOut);
+    ActionButton qrButton = new ActionButton("QR Code", qrcode);
 
     Expanded actionButtons;
     // If the user is a teacher, show correct buttons
@@ -241,6 +206,7 @@ class PassState extends State<Pass> {
       actionButtons = new Expanded(
         child: new Container(
           alignment: FractionalOffset.bottomCenter,
+          child: pass.nextAction() != null ? qrButton : new Container(),
         ),
       );
     }

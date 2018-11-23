@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:pass_master/api/pass.dart';
-import 'package:pass_master/models/teacher-pass.dart';
-
-import '../../fragments/header.dart';
 import '../../fragments/pass/pass.dart';
 import '../../models/currentuser.dart';
 import '../../models/pass.dart';
 import '../../api/pass_list.dart';
+import '../../models/storage.dart';
+import '../../models/scanner.dart';
+import '../auth/login.dart';
 
 class Home extends StatefulWidget {
   CurrentUserModel user;
@@ -46,20 +45,44 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
 
     return new Container(
-      child: new Column(
-        children: <Widget>[
-          new Container(
-                  margin: EdgeInsets.only(top:20.0, left: 25.0),
-                  child: Header(user)
+      child: new Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.orangeAccent,
+          title: new Row(
+            children: <Widget>[
+              new Icon(
+                Icons.person,
+                size: 20.0,
+                color: Colors.white,
+              ),
+              new Text(
+                ' ' + this.user.firstname + ' ' + this.user.lastname,
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+              )
+            ],
           ),
-          new Flexible(
-            child: new Container(
-              padding: EdgeInsets.all(20.0),
-              child: pass,
+          actions: <Widget>[
+            user.type == '2' ? IconButton(
+              icon: Icon(Icons.camera),
+              onPressed: () {
+                Scanner.scan(user);
+              },
+            ) : new Container(),
+
+            new IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () {
+                Storage().removeUser();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));     
+              },
             ),
-          )
-        ],
-      ),
+          ],
+        ),
+        body: new Container(
+          padding: EdgeInsets.all(20.0),
+          child: pass,
+        ),
+      )
     );
   }
 }

@@ -88,4 +88,15 @@ class SRTPassModel extends PassModel {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher_info']);
     this.session = json['session'];
   }
+
+  @override //TODO add more elseif for timeleftdestination and timearrivedorigin
+  String nextAction() {
+    if (!approved) {
+      return "approve";
+    } else if (timeLeftOrigin == null) {
+      return "signout";
+    } else if (timeArrivedDestination == null) {
+      return "signin";
+    } 
+  }
 }

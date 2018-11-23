@@ -111,4 +111,17 @@ class PassModel {
     }
 
   }
+
+  String nextAction() {
+    if (!approved) {
+      return "approve";
+    } else if (timeLeftOrigin == null) {
+      return "signout";
+    } else if (timeArrivedDestination == null) {
+      return "signin";
+    } else {
+      return null;
+    }
+  }
+  
 }
