@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../models/pass.dart';
+import '../../models/currentuser.dart';
 
 class PassMini extends StatelessWidget {
   PassModel pass;
+  CurrentUserModel user;
 
-  PassMini(this.pass);
+  PassMini(this.pass, this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class PassMini extends StatelessWidget {
                   padding: EdgeInsets.only(right: 10.0),
                 ),
                 new Text(
-                  pass.destination,
+                  pass.getName(user),
                   style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                 ),
               ],

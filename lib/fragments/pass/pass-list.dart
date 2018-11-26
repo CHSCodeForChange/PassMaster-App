@@ -67,7 +67,7 @@ class PassListState extends State<PassList> {
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => new ViewPass(user, passes.elementAt(index))));
           },
-          child: new PassMini(passes.elementAt(index)),
+          child: new PassMini(passes.elementAt(index), user),
         );
       },
     );
