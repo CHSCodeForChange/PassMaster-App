@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import './user.dart';
 import './pass.dart';
 import 'datetime.dart';
+import 'currentuser.dart';
 
 
 class TeacherPassModel extends PassModel {
@@ -40,8 +41,8 @@ class TeacherPassModel extends PassModel {
     };
 
   @override 
-  String getName() {
-    return destinationTeacher.getName();
+  String getName(CurrentUserModel user) {
+    return user.type == '1' ? destinationTeacher.getName() : student.getName();
   }
 
   @override

@@ -131,7 +131,7 @@ class PassState extends State<Pass> {
         new Container(child: pass.getIcon(), padding: EdgeInsets.all(10.0),),
         new Expanded(
           child: new AutoSizeText(
-            pass.getName(),
+            pass.getName(user),
             textAlign: TextAlign.left,
             maxLines: 1,
             style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
@@ -156,7 +156,7 @@ class PassState extends State<Pass> {
     }
     if(pass.timeArrivedDestination != null) {
       descriptors.add(new Row(children: <Widget>[new Expanded(child:
-        new AutoSizeText("Arrived Destination: " + MyDateTime.getTime(pass.timeLeftOrigin), maxLines: 1, style: descriptorStyle)
+        new AutoSizeText("Arrived Destination: " + MyDateTime.getTime(pass.timeArrivedDestination), maxLines: 1, style: descriptorStyle)
       ),],));
     }
 

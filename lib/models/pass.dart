@@ -2,6 +2,7 @@ import './user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './datetime.dart';
+import './currentuser.dart';
 
 class PassModel {
   int pk;
@@ -89,8 +90,8 @@ class PassModel {
     return MyDateTime.getDate(date, showYear: showYear, shortenedMonths: shortenedMonths) + ", " + getDuration();
   }
 
-  String getName() {
-    return destination;
+  String getName(CurrentUserModel user) {
+    return user.type == '1' ? destination : student.getName();
   }
 
   Icon getIcon({childIcon: false}) {

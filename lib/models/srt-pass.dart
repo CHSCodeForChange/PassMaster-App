@@ -3,6 +3,7 @@ import './pass.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import './datetime.dart';
+import 'currentuser.dart';
 
 
 class SRTPassModel extends PassModel {
@@ -29,8 +30,8 @@ class SRTPassModel extends PassModel {
   }
 
   @override 
-  String getName() {
-    return destinationTeacher.getName();
+  String getName(CurrentUserModel user) {
+    return user.type == '1' ? destinationTeacher.getName() : student.getName();
   }
 
   @override

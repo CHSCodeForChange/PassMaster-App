@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import './user.dart';
 import './pass.dart';
 import 'datetime.dart';
+import 'currentuser.dart';
 
 class LocationPassModel extends PassModel {
   String location;
@@ -39,8 +40,8 @@ class LocationPassModel extends PassModel {
     };
 
   @override 
-  String getName() {
-    return location;
+  String getName(CurrentUserModel user) {
+    return user.type == '1' ? location : student.getName();
   }
 
   @override
