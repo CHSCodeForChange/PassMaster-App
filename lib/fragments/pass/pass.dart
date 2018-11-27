@@ -145,8 +145,14 @@ class PassState extends State<Pass> {
     TextStyle descriptorStyle = TextStyle(fontStyle: FontStyle.italic, fontSize: 20.0);
     
     descriptors.add(new Row(children: <Widget>[new Expanded(child: 
-      new AutoSizeText("Origin Teacher: " + (pass?.originTeacher?.getName() ?? ""), maxLines: 1, style: descriptorStyle)
+      new AutoSizeText("Origin: " + (pass?.originTeacher?.getName() ?? ""), maxLines: 1, style: descriptorStyle)
     )],));
+
+    if (user.type == '2') {
+      descriptors.add(new Row(children: <Widget>[new Expanded(child: 
+        new AutoSizeText("Destination: " + (pass?.getDestination() ?? ""), maxLines: 1, style: descriptorStyle)
+      )],));
+    }
 
     if(pass.timeLeftOrigin != null) {
       descriptors.add(new Row(children: <Widget>[new Expanded(child:

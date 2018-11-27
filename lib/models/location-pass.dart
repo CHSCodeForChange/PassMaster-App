@@ -45,6 +45,11 @@ class LocationPassModel extends PassModel {
   }
 
   @override
+  String getDestination() {
+    return location;
+  }
+
+  @override
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.location_on);
   }

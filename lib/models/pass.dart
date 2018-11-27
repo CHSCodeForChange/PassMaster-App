@@ -94,6 +94,10 @@ class PassModel {
     return user.type == '1' ? destination : student.getName();
   }
 
+  String getDestination() {
+    return destination;
+  }
+
   Icon getIcon({childIcon: false}) {
     if(!childIcon) {
       return Icon(Icons.layers);

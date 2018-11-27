@@ -46,6 +46,11 @@ class TeacherPassModel extends PassModel {
   }
 
   @override
+  String getDestination() {
+    return destinationTeacher.getName();
+  }
+
+  @override
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.person);
   }

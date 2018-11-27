@@ -35,6 +35,11 @@ class SRTPassModel extends PassModel {
   }
 
   @override
+  String getDestination() {
+    return destinationTeacher.getName();
+  }
+
+  @override
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.hourglass_full);
   }
