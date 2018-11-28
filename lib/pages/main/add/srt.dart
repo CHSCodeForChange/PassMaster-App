@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../api/create.dart';
+
 import '../../../models/srt-pass.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';
 
-import '../../../fragments/form/date-picker.dart';
-import '../../../fragments/messages.dart';
-import '../../../fragments/dropdown.dart';
-import '../../../fragments/form/user-picker.dart';
-import '../../../fragments/form/field2.dart';
+import '../../../utilities/messages.dart';
+
+import '../../../components/form/date-picker.dart';
+import '../../../components/ui/dropdown.dart';
+import '../../../components/form/user-picker.dart';
+import '../../../components/form/field2.dart';
 import '../passes/view-pass.dart';
 
-
-import '../../../api/create.dart';
 
 class SRTPassForm extends StatefulWidget {
   CurrentUserModel user;

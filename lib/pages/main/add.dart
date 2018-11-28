@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../fragments/dropdown.dart';
+import '../../components/ui/dropdown.dart';
 import './add/teacher.dart';
 import './add/srt.dart';
 import './add/location.dart';

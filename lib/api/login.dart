@@ -18,10 +18,12 @@ class LoginAPI extends API {
       }
     );
 
+    print(response);
+
     if (json.decode(response.body)['non_field_errors'] != null) {
       throw(json.decode(response.body)['non_field_errors'][0]);
     }
-    
+
     String token = "Token " + json.decode(response.body)['token'];
     
     UserModel user = await UserAPI().getData(token, null);

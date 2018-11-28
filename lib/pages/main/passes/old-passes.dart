@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:async';
 
-import '../../../fragments/pass/pass-list.dart';
+import '../../../fragments/pass-list.dart';
 import '../../../api/pass_list.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';

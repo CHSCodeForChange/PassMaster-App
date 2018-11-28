@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../fragments/pass/pass.dart';
+import '../../fragments/pass.dart';
 import '../../models/currentuser.dart';
 import '../../models/pass.dart';
 import '../../api/pass_list.dart';
-import '../../models/storage.dart';
-import '../../models/scanner.dart';
+import '../../utilities/storage.dart';
+import '../../utilities/scanner.dart';
 import '../auth/login.dart';
 
 class Home extends StatefulWidget {

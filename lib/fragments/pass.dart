@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pass_master/api/pass.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../models/pass.dart';
-import '../../models/datetime.dart';
-import '../../models/currentuser.dart';
-import '../messages.dart';
-import 'action-button.dart';
+import '../api/pass.dart';
+
+import '../utilities/messages.dart';
+
+import '../models/pass.dart';
+import '../models/datetime.dart';
+import '../models/currentuser.dart';
+
+import '../components/ui/action-button.dart';
+import '../components/ui/loader.dart';
 import 'qr.dart';
+
 
 class Pass extends StatefulWidget {
   PassState state;
@@ -104,24 +109,9 @@ class PassState extends State<Pass> {
       // Loading animation
       return new Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        child: new Column(
-          children: <Widget>[new Expanded(
-            child: new Container(
-              height: double.infinity, // force card to take up full space
-              width: double.infinity, 
-              padding: EdgeInsets.all(25.0),
-              alignment: FractionalOffset.center,
-              child: new SizedBox(
-                width: 75.0,
-                height: 75.0,
-                child: new CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
-                  strokeWidth: 5.0,
-                ),
-              )
-            )
-          )]
-        )
+        child: new Center(
+            child: new Loader(true),
+        ),
       );
     }
 

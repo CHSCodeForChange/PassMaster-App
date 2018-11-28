@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../models/user.dart';
 import '../../models/currentuser.dart';
-import './button-field.dart';
-import '../user-search.dart';
+import '../../components/form/button-field.dart';
+import '../../fragments/user-search.dart';
 
 class UserPicker extends StatefulWidget {
   UserPickerState state; 

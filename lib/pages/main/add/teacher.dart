@@ -5,11 +5,12 @@ import '../../../models/teacher-pass.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';
 
-import '../../../fragments/form/date-picker.dart';
-import '../../../fragments/form/time-picker.dart';
-import '../../../fragments/messages.dart';
-import '../../../fragments/form/user-picker.dart';
-import '../../../fragments/form/field2.dart';
+import '../../../utilities/messages.dart';
+
+import '../../../components/form/date-picker.dart';
+import '../../../components/form/time-picker.dart';
+import '../../../components/form/user-picker.dart';
+import '../../../components/form/field2.dart';
 
 import '../../../api/create.dart';
 import '../passes/view-pass.dart';

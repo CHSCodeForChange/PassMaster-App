@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../fragments/pass/pass-list.dart';
+import '../../../fragments/pass-list.dart';
 import '../../../models/user.dart';
 
 class UnapprovedPasses extends StatelessWidget {

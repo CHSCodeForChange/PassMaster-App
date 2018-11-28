@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
-import 'currentuser.dart';
+import '../models/currentuser.dart';
 import '../api/pass.dart';
 
 class Scanner {

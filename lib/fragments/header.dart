@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/user.dart';
-import '../models/storage.dart';
+import '../utilities/storage.dart';
 import '../pages/auth/login.dart';
 
 class Header extends StatelessWidget {  

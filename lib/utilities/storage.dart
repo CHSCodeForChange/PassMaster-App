@@ -1,6 +1,6 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'currentuser.dart';
+import '../models/currentuser.dart';
 
 class Storage {
 

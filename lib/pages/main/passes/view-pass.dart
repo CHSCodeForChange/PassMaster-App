@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pass_master/fragments/header.dart';
-import 'dart:async';
 
-import '../../../api/pass.dart';
-import '../../../fragments/pass/pass.dart';
-import '../../../models/srt-pass.dart';
+import '../../../fragments/pass.dart';
 import '../../../models/pass.dart';
-import '../../../models/teacher-pass.dart';
-import '../../../models/location-pass.dart';
 import '../../../models/currentuser.dart';
 
 class ViewPass extends StatefulWidget {

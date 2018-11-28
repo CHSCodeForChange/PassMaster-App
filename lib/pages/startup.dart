@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './main/main.dart';
 import './auth/login.dart';
 
-import '../models/storage.dart';
+import '../utilities/storage.dart';
 import '../models/currentuser.dart';
 
 class Startup extends StatefulWidget {

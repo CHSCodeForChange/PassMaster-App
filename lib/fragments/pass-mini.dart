@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../models/pass.dart';
-import '../../models/currentuser.dart';
+import '../models/pass.dart';
+import '../models/currentuser.dart';
 
 class PassMini extends StatelessWidget {
   PassModel pass;

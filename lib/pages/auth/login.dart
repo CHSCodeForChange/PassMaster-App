@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 import '../main/main.dart';
 import './signup.dart';
+
 import '../../api/login.dart';
+
 import '../../models/currentuser.dart';
-import '../../models/storage.dart';
-import '../../fragments/form/field.dart';
-import '../../fragments/button.dart';
-import '../../fragments/messages.dart';
-import 'package:flutter/services.dart';
+
+import '../../utilities/storage.dart';
+import '../../utilities/messages.dart';
+
+import '../../components/form/field.dart';
+import '../../components/ui/button.dart';
 
 
 class Login extends StatelessWidget {

@@ -68,7 +68,7 @@ class UserSearchState extends State<UserSearch> {
       body: new Container(
         color: Colors.orangeAccent,
         padding: EdgeInsets.all(10.0),
-        child: ListView.builder(
+        child: users == null ? new Center(child: new CircularProgressIndicator()) : ListView.builder(
           itemCount: users == null ? 0 : users.length,
           itemExtent: 75.0,
           itemBuilder: (BuildContext context, int index) {

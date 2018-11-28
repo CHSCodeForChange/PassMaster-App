@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../pages/main/passes/view-pass.dart';
+
+import '../models/pass.dart';
+import '../models/currentuser.dart';
+
+import '../components/ui/loader.dart';
 import './pass-mini.dart';
-import '../../models/pass.dart';
-import '../../models/currentuser.dart';
-import '../../pages/main/passes/view-pass.dart';
-
-
 
 class PassList extends StatefulWidget {
   PassListState state;
@@ -15,9 +16,11 @@ class PassList extends StatefulWidget {
   
   void update(Iterable<PassModel> passes) {
     this.passes = passes;
-    state.setState(() {
-      state.passes = passes;
-    });
+    if (state.mounted) {
+      state.setState(() {
+        state.passes = passes;
+      });
+    }
   }
 
   PassList(this.passes, this.user);
@@ -40,22 +43,8 @@ class PassListState extends State<PassList> {
   @override
   Widget build(BuildContext context) {
     if (passes == null) {
-      return new Column(
-        children: <Widget>[
-          new Expanded(
-            child: new Container(
-              alignment: FractionalOffset.center,
-              child: new SizedBox(
-                width: 75.0,
-                height: 75.0,
-                child: new CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 5.0,
-                ),
-              )
-            )
-          )
-        ]
+      return new Center(
+        child: new Loader(false)
       );
     }
     return passes?.length==0 ?? false ? Center(child: Text('No passes in this list.', style: TextStyle(color: Colors.white, fontSize: 26.0),)) : new ListView.builder(
