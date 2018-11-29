@@ -5,6 +5,7 @@ import './passes/active-passes.dart';
 import './passes/passes.dart';
 import './passes/pending-passes.dart';
 import './passes/old-passes.dart';
+import './passes/calendar.dart';
 import '../../models/currentuser.dart';
 
 class Passes extends StatelessWidget {
@@ -60,7 +61,12 @@ class Passes extends StatelessWidget {
             indicatorWeight: 3.0,
             tabs: getTabs(),
           ),
-
+          floatingActionButton: new FloatingActionButton(
+            child: new Icon(Icons.calendar_today),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => new MyCalendar(user)));
+            },
+          ),
           body: TabBarView(
             children: getChildren(),
           ),

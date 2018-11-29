@@ -33,7 +33,7 @@ class GenericPassesState extends State<GenericPasses> {
   }
 
   Future<void> getData() async {
-    Iterable<PassModel> passes = await PassListAPI().getData(user.token, list_type);
+    Iterable<PassModel> passes = await PassListAPI().getData(user.token, listType: list_type);
     list.update(passes);
   }
 

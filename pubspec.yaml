@@ -25,6 +25,7 @@ dependencies:
   flutter_launcher_icons: "^0.6.1"
   qr_flutter:
   barcode_scan:
+  flutter_calendar:
   
 flutter_icons:
   android: true  

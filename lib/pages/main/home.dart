@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../../fragments/pass.dart';
 import '../../models/currentuser.dart';
 import '../../models/pass.dart';
-import '../../api/pass_list.dart';
+import '../../api/pass.dart';
 import '../../utilities/storage.dart';
 import '../../utilities/scanner.dart';
 import '../auth/login.dart';
@@ -31,11 +31,10 @@ class HomeState extends State<Home> {
 
   Future<void> getData() async {
 
-    Iterable<PassModel> passes = await PassListAPI().getData(user.token, null);
-    PassModel pass_raw = passes.elementAt(0);
+    PassModel _pass = await PassAPI().getTop(user.token);
 
     pass.state.setState(() {
-      pass.state.pass = pass_raw;
+      pass.state.pass = _pass;
     });
     pass.state.getPass();
 

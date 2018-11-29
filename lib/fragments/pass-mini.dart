@@ -26,8 +26,8 @@ class PassMini extends StatelessWidget {
                   padding: EdgeInsets.only(right: 10.0),
                 ),
                 new Text(
-                  pass.getName(user),
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                  pass.getName(user) ?? "Type Error",
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: pass.getName(user) == null ? Colors.red : Colors.black),
                 ),
               ],
             ),

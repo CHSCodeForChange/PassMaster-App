@@ -121,10 +121,10 @@ class PassState extends State<Pass> {
         new Container(child: pass.getIcon(), padding: EdgeInsets.all(10.0),),
         new Expanded(
           child: new AutoSizeText(
-            pass.getName(user),
+            pass.getName(user) ?? "Type Error",
             textAlign: TextAlign.left,
             maxLines: 1,
-            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold, color: pass.getName(user) == null ? Colors.red : Colors.black),
           ),
         )
       ],

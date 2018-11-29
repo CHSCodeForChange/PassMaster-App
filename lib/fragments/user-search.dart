@@ -4,6 +4,7 @@ import 'dart:async';
 import '../models/currentuser.dart';
 import '../models/user.dart';
 import '../api/user-search.dart';
+import '../components/ui/loader.dart';
 
 class UserSearch extends StatefulWidget {
   CurrentUserModel user;
@@ -68,7 +69,7 @@ class UserSearchState extends State<UserSearch> {
       body: new Container(
         color: Colors.orangeAccent,
         padding: EdgeInsets.all(10.0),
-        child: users == null ? new Center(child: new CircularProgressIndicator()) : ListView.builder(
+        child: users == null ? new Center(child: new Loader(false)) : ListView.builder(
           itemCount: users == null ? 0 : users.length,
           itemExtent: 75.0,
           itemBuilder: (BuildContext context, int index) {

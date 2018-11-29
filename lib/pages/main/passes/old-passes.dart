@@ -30,7 +30,7 @@ class OldPassesState extends State<OldPasses> {
   }
 
   Future<void> getData() async {
-    Iterable<PassModel> passes = await PassListAPI().getData(user.token, "student-old");
+    Iterable<PassModel> passes = await PassListAPI().getData(user.token, listType: "student-old");
     list.state.setState(() {
       list.state.passes = passes;
     });

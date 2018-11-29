@@ -27,8 +27,6 @@ class PassAPI extends API {
       }
     );
 
-    print(response.body);
-
     PassModel pass;
     Map<String, dynamic> data = json.decode(response.body);
 
@@ -45,6 +43,24 @@ class PassAPI extends API {
       pass = new PassModel.fromJson(data);
     }
 
+
+    return pass;
+  }
+
+  Future<PassModel> getTop(String token) async {
+    String url = this.baseUrl + 'passes/studenttop/?format=json';
+
+    var response = await http.get(
+      Uri.encodeFull(url),
+      headers: {
+        "Authorization": token, 
+      }
+    );
+
+    PassModel pass;
+    Map<String, dynamic> data = json.decode(response.body);
+
+    pass = new PassModel.fromJson(data);
 
     return pass;
   }

@@ -31,7 +31,7 @@ class ActivePassesState extends State<ActivePasses> {
   }
 
   Future<void> getData() async {
-    Iterable<PassModel> passes = await PassListAPI().getData(user.token, "active");
+    Iterable<PassModel> passes = await PassListAPI().getData(user.token, listType: "active");
     list.update(passes);
   }
 

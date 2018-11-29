@@ -7,11 +7,15 @@ import '../models/pass.dart';
 
 class PassListAPI extends API {
 
-  Future<Iterable<PassModel>> getData(String token, String listType) async {
+  Future<Iterable<PassModel>> getData(String token, {String listType, String date}) async {
     String url = this.baseUrl + 'passes/?format=json';
     
     if (listType != null) {
       url += '&list=' + listType;
+    }
+
+    if (date != null) {
+      url += '&date=' + date;
     }
 
     var response = await http.get(

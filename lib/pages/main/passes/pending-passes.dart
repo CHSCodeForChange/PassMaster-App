@@ -30,7 +30,7 @@ class PendingPassesState extends State<PendingPasses> {
   }
 
   Future<void> getData() async {
-    Iterable<PassModel> passes = await PassListAPI().getData(user.token, "pending");
+    Iterable<PassModel> passes = await PassListAPI().getData(user.token, listType: "pending");
     list.update(passes);
   }
 
