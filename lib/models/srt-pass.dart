@@ -9,6 +9,8 @@ import 'currentuser.dart';
 class SRTPassModel extends PassModel {
   UserModel destinationTeacher;
   String session;
+  TimeOfDay timeLeftDestination, timeArrivedOrigin;
+
 
   SRTPassModel(
     DateTime date, 
@@ -93,6 +95,8 @@ class SRTPassModel extends PassModel {
   SRTPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher_info']);
     this.session = json['session'];
+    timeArrivedOrigin = MyDateTime.parseTime(json['timeArrivedOrigin']);
+    timeLeftDestination = MyDateTime.parseTime(json['timeLeftDestination']);
   }
 
   @override //TODO add more elseif for timeleftdestination and timearrivedorigin
@@ -103,6 +107,21 @@ class SRTPassModel extends PassModel {
       return "signout";
     } else if (timeArrivedDestination == null) {
       return "signin";
+    } else if (timeLeftDestination == null) {
+      return "signout";
+    } else if (timeArrivedOrigin == null) {
+      return "signin";
     } 
   }
+
+  @override
+  List<String> getTimes() {
+    List<String> times = [];
+    if (timeLeftOrigin != null) times.add("Left Origin: " + MyDateTime.getTime(timeLeftOrigin));
+    if (timeArrivedDestination != null) times.add("Arrived Destination: " + MyDateTime.getTime(timeArrivedDestination));
+    if (timeLeftDestination != null) times.add("Left Destination: " + MyDateTime.getTime(timeLeftDestination));
+    if (timeArrivedOrigin != null) times.add("Arrived Origin: " + MyDateTime.getTime(timeArrivedOrigin));
+    return times;
+  }
+
 }

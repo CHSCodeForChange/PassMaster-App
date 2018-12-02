@@ -24,7 +24,7 @@ dependencies:
   datetime_picker_formfield:  
   flutter_launcher_icons: "^0.6.1"
   qr_flutter:
-  barcode_scan:
+  # qr_mobile_vision:
   flutter_calendar:
   
 flutter_icons:

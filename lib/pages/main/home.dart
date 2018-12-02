@@ -6,7 +6,7 @@ import '../../models/currentuser.dart';
 import '../../models/pass.dart';
 import '../../api/pass.dart';
 import '../../utilities/storage.dart';
-import '../../utilities/scanner.dart';
+import '../../fragments/scanner.dart';
 import '../auth/login.dart';
 
 class Home extends StatefulWidget {
@@ -61,12 +61,12 @@ class HomeState extends State<Home> {
             ],
           ),
           actions: <Widget>[
-            user.type == '2' ? IconButton(
-              icon: Icon(Icons.camera),
-              onPressed: () {
-                Scanner.scan(user);
-              },
-            ) : new Container(),
+            // user.type == '2' ? IconButton(
+            //   icon: Icon(Icons.camera),
+            //   onPressed: () {
+            //     Navigator.push(context, new MaterialPageRoute(builder: (context) => new Scanner(user)));
+            //   },
+            // ) : new Container(),
 
             new IconButton(
               icon: Icon(Icons.exit_to_app),

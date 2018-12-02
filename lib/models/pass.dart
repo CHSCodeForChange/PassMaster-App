@@ -128,5 +128,12 @@ class PassModel {
       return null;
     }
   }
+
+  List<String> getTimes() {
+    List<String> times = [];
+    if (timeLeftOrigin != null) times.add("Left Origin: " + MyDateTime.getTime(timeLeftOrigin));
+    if (timeArrivedDestination != null) times.add("Arrived Destination: " + MyDateTime.getTime(timeArrivedDestination));
+    return times;
+  }
   
 }

@@ -144,15 +144,9 @@ class PassState extends State<Pass> {
       )],));
     }
 
-    if(pass.timeLeftOrigin != null) {
+    for (String time in pass.getTimes()) {
       descriptors.add(new Row(children: <Widget>[new Expanded(child:
-        new AutoSizeText("Left Origin: " + MyDateTime.getTime(pass.timeLeftOrigin), maxLines: 1, style: descriptorStyle)
-      ),],));
-     MyDateTime.getTime(pass.timeLeftOrigin);
-    }
-    if(pass.timeArrivedDestination != null) {
-      descriptors.add(new Row(children: <Widget>[new Expanded(child:
-        new AutoSizeText("Arrived Destination: " + MyDateTime.getTime(pass.timeArrivedDestination), maxLines: 1, style: descriptorStyle)
+        new AutoSizeText(time, maxLines: 1, style: descriptorStyle)
       ),],));
     }
 
@@ -197,7 +191,6 @@ class PassState extends State<Pass> {
         );
       }
     }
-    // If the user is a student, show nothing
     else {
       actionButtons = new Expanded(
         child: new Container(
@@ -206,8 +199,6 @@ class PassState extends State<Pass> {
         ),
       );
     }
-
-
 
     return new Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
