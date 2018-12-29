@@ -143,11 +143,13 @@ class PassState extends State<Pass> {
       )],));
     }
 
-    for (String time in pass.getTimes()) {
-      descriptors.add(new Row(children: <Widget>[new Expanded(child:
-        new AutoSizeText(time, maxLines: 1, style: descriptorStyle)
-      ),],));
-    }
+//    Replaced with disabled action buttons at bottom
+
+//    for (String time in pass.getTimes()) {
+//      descriptors.add(new Row(children: <Widget>[new Expanded(child:
+//        new AutoSizeText(time, maxLines: 1, style: descriptorStyle)
+//      ),],));
+//    }
 
     // Initialize approve signin, and signout buttons
     ActionButton approveButton = new ActionButton("Approve", approve);
@@ -198,6 +200,15 @@ class PassState extends State<Pass> {
         ),
       );
     }
+    List<Widget> historyChildren = [];
+    Column history = new Column(
+        children: historyChildren,
+    );
+    for (String time in pass.getTimes()) {
+      historyChildren.add(new Row(children: <Widget>[new Expanded(child: new ActionButton(
+      time, null, true
+      )),],));
+    }
 
     return new Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -235,7 +246,8 @@ class PassState extends State<Pass> {
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-            actionButtons
+            actionButtons,
+            history
           ],
         ),
       ),
