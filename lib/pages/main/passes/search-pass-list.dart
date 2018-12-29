@@ -19,9 +19,9 @@ class SearchPassList extends StatelessWidget {
             padding: EdgeInsets.only(top:10.0, right: 10.0, left: 10.0),
             child: SearchFilters(),
           ),
-          new Expanded(
+//          new Expanded(
             // child: new PassList(),
-          )
+//          )
         ],
       )
     );

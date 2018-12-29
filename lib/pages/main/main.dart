@@ -80,11 +80,6 @@ class MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.orangeAccent,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarColor: Colors.transparent,
-    ));
     return Theme(
       data: ThemeData(
         scaffoldBackgroundColor: Colors.orangeAccent,

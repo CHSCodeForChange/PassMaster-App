@@ -63,6 +63,7 @@ class MyDateTime {
       case 24:
         return "Dec";
     }
+    return "Invalid month integer.";
   }
 
   static TimeOfDay parseTime(String time) {

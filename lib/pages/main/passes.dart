@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import './passes/active-passes.dart';
@@ -28,6 +29,7 @@ class Passes extends StatelessWidget {
         Tab(text: 'Old'),
       ];
     }
+    return null;
   }
 
   List<Widget> getChildren() {
@@ -45,10 +47,16 @@ class Passes extends StatelessWidget {
         new GenericPasses(user, 'teacher-old'),
       ];
     }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color.fromARGB(255, 250, 250, 250),
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ));
     return new Container(
       margin: EdgeInsets.only(top:20.0),
       child: DefaultTabController(

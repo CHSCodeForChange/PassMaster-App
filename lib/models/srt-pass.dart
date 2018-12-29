@@ -58,6 +58,7 @@ class SRTPassModel extends PassModel {
       case '3':
         return 'Both';
     }
+    return "Invalid session value of " + session;
   }
 
   static TimeOfDay getStart(String session) {
@@ -69,6 +70,7 @@ class SRTPassModel extends PassModel {
       case "3":
         return TimeOfDay(hour: 9, minute: 30);
     }
+    return null;
   }
 
   static TimeOfDay getEnd(String session) {
@@ -80,6 +82,7 @@ class SRTPassModel extends PassModel {
       case "3":
       return TimeOfDay(hour: 11, minute: 3);
     }
+    return null;
   }
 
   Map<String, dynamic> toJson() =>
@@ -111,7 +114,9 @@ class SRTPassModel extends PassModel {
       return "signout";
     } else if (timeArrivedOrigin == null) {
       return "signin";
-    } 
+    } else {
+      return "Next action undefined.";
+    }
   }
 
   @override

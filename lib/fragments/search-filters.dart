@@ -25,6 +25,7 @@ class SearchFilters extends StatelessWidget {
           child: new RaisedButton(
             child: new Icon(Icons.tune),
             color: Colors.white,
+            onPressed: () => {},
           )
         )  
       ],

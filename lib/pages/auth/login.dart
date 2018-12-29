@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 
 import '../main/main.dart';
-import './signup.dart';
 
 import '../../api/login.dart';
 
@@ -19,6 +18,11 @@ import '../../components/ui/button.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.orangeAccent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+    ));
     return new Scaffold(
       backgroundColor: Colors.orangeAccent,
       body: new LoginBody(),

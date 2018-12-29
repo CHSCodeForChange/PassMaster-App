@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../fragments/pass.dart';
@@ -42,7 +43,11 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color.fromARGB(255, 250, 250, 250),
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ));
     return new Container(
       child: new Scaffold(
         appBar: AppBar(
