@@ -52,7 +52,7 @@ class LoginBody extends StatelessWidget {
         Messages.message("Logging in...", context);
         user = await LoginAPI().getData(username.value, password.value);
         Storage().storeUser(user);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Main(user)));
         Messages.clear(context);
         _formKey.currentState.reset();
       } catch (e) {
