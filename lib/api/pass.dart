@@ -28,7 +28,10 @@ class PassAPI extends API {
     );
 
     print(response.body);
-
+    // Check if pass is null which happens when there are no passes for a user
+    if(response.body.contains("\"student\":null")){
+      return null;
+    }
     PassModel pass;
     Map<String, dynamic> data = json.decode(response.body);
 
@@ -60,6 +63,11 @@ class PassAPI extends API {
     );
 
     PassModel pass;
+    print(response.body);
+    // Check if pass is null which happens when there are no passes for a user
+    if(response.body.contains("\"student\":null")){
+      return null;
+    }
     Map<String, dynamic> data = json.decode(response.body);
 
     pass = new PassModel.fromJson(data);

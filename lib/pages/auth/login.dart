@@ -31,13 +31,12 @@ class Login extends StatelessWidget {
 }
 
 class LoginBody extends StatelessWidget {
-  GlobalKey<FormState> _formKey;
+  static final _formKey = GlobalKey<FormState>();
   MyField username, password;
   bool loggingIn = false;
 
 
   LoginBody () {
-    _formKey = GlobalKey<FormState>();
     username = MyField('username', false);
     password = MyField('password', true);
   }
@@ -53,9 +52,9 @@ class LoginBody extends StatelessWidget {
         Messages.message("Logging in...", context);
         user = await LoginAPI().getData(username.value, password.value);
         Storage().storeUser(user);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Main(user)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Main(user)));
         Messages.clear(context);
-        this._formKey.currentState.reset();
+        _formKey.currentState.reset();
       } catch (e) {
         Messages.error(e.toString(), context);
       }

@@ -22,6 +22,8 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   CurrentUserModel user;
   Pass pass;
+  // hasPass is used to stop the loading animation if there are no passes in the list
+  bool hasPass = true;
 
   HomeState(this.user);
 
@@ -34,12 +36,14 @@ class HomeState extends State<Home> {
   Future<void> getData() async {
 
     PassModel _pass = await PassAPI().getTop(user.token);
-
     pass.state.setState(() {
       pass.state.pass = _pass;
     });
-    pass.state.getPass();
-
+    if(pass.state.pass != null) {
+      pass.state.getPass();
+    } else {
+      hasPass = false;
+    }
   }
 
   void scan() async {
@@ -92,7 +96,7 @@ class HomeState extends State<Home> {
         ),
         body: new Container(
           padding: EdgeInsets.all(20.0),
-          child: pass,
+          child: hasPass ? pass:new Center(child: new Text('No passes for this user.', style: TextStyle(color: Colors.white, fontSize: 26.0))),
         ),
       )
     );
