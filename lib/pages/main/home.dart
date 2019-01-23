@@ -9,6 +9,7 @@ import '../../api/pass.dart';
 import '../../utilities/storage.dart';
 import '../../fragments/scanner.dart';
 import '../auth/login.dart';
+import 'package:qr_reader/qr_reader.dart';
 
 class Home extends StatefulWidget {
   CurrentUserModel user;
@@ -41,6 +42,13 @@ class HomeState extends State<Home> {
 
   }
 
+  void scan() async {
+    String code = await new QRCodeReader().scan();
+    List<String> data = code.split(",");
+    PassAPI().getData(user.token, int.parse(data.elementAt(0)), data.elementAt(0), data.elementAt(0));
+
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -66,12 +74,12 @@ class HomeState extends State<Home> {
             ],
           ),
           actions: <Widget>[
-            // user.type == '2' ? IconButton(
-            //   icon: Icon(Icons.camera),
-            //   onPressed: () {
-            //     Navigator.push(context, new MaterialPageRoute(builder: (context) => new Scanner(user)));
-            //   },
-            // ) : new Container(),
+            user.type == '2' ? IconButton(
+              icon: Icon(Icons.camera),
+              onPressed: () {
+                scan();
+              },
+            ) : new Container(),
 
             new IconButton(
               icon: Icon(Icons.exit_to_app),
