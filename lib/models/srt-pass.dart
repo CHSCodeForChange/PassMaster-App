@@ -100,9 +100,11 @@ class SRTPassModel extends PassModel {
     this.session = json['session'];
     timeArrivedOrigin = MyDateTime.parseTime(json['timeArrivedOrigin']);
     timeLeftDestination = MyDateTime.parseTime(json['timeLeftDestination']);
+
+    type = "SRTPass";
   }
 
-  @override //TODO add more elseif for timeleftdestination and timearrivedorigin
+  @override
   String nextAction() {
     if (!approved) {
       return "approve";
@@ -115,7 +117,24 @@ class SRTPassModel extends PassModel {
     } else if (timeArrivedOrigin == null) {
       return "signin";
     } else {
-      return "Next action undefined.";
+      return null;
+    }
+  }
+
+  @override
+  String nextActionByMe() {
+    if (!approved && canApprove) {
+      return "approve";
+    } else if (timeLeftOrigin == null && canSignOut) {
+      return "signout";
+    } else if (timeArrivedDestination == null && canSignIn) {
+      return "signin";
+    } else if (timeLeftDestination == null && canSignIn) {
+      return "signout";
+    } else if (timeArrivedOrigin == null && canSignOut) {
+      return "signin";
+    } else {
+      return null;
     }
   }
 
@@ -127,9 +146,5 @@ class SRTPassModel extends PassModel {
     if (timeLeftDestination != null) times.add("Left Destination: " + MyDateTime.getTime(timeLeftDestination));
     if (timeArrivedOrigin != null) times.add("Arrived Origin: " + MyDateTime.getTime(timeArrivedOrigin));
     return times;
-  }
-
-  String getType() {
-    return "SRTPass";
   }
 }

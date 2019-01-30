@@ -50,8 +50,13 @@ class HomeState extends State<Home> {
   void scan(BuildContext context) async {
     String code = await new QRCodeReader().scan();
     List<String> data = code.split(",");
-    print(code);
-    if (PassAPI().getData(user.token, int.parse(data.elementAt(0)), data.elementAt(0), data.elementAt(0)) != null) {
+    int pk = int.parse(data.elementAt(0));
+    String type = data.elementAt(1);
+
+    PassModel pass = await PassAPI().getData(user.token, pk, type, null);
+
+    if (pass.nextActionByMe() != null) {
+      await PassAPI().getData(user.token, pk, type, pass.nextActionByMe());
       Messages.message("Success", context);
     } else {
       Messages.error("Failed", context);

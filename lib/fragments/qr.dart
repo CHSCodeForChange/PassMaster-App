@@ -21,11 +21,11 @@ class QRState extends State<QR> {
 
   String getData() {
     String pk = pass.pk.toString();
-    String type = pass.getType() != null ? pass.getType() : "";
-    String action = pass.nextAction();
+    String type = pass.type;
+    // String type = pass.getType() != null ? pass.getType() : "";
+    // String action = pass.nextAction();
 
-    String data = pk+","+type+","+action;
-    print(data);
+    String data = pk+","+type;
     return data;
   }
 

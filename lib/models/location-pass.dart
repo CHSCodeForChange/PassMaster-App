@@ -26,6 +26,8 @@ class LocationPassModel extends PassModel {
 
   LocationPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.location = json['location'];
+
+    type = "LocationPass";
   }
 
   Map<String, dynamic> toJson() =>
@@ -52,9 +54,5 @@ class LocationPassModel extends PassModel {
   @override
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.location_on);
-  }
-
-  String getType() {
-      return "LocationPass";
   }
 }

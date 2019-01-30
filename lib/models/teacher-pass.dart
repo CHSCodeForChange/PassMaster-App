@@ -27,6 +27,8 @@ class TeacherPassModel extends PassModel {
 
   TeacherPassModel.fromJson(Map<String, dynamic> json) :super.fromJson(json) {
     this.destinationTeacher = UserModel.fromJson(json['destinationTeacher_info']);
+
+    type = "TeacherPass";
   }
 
   Map<dynamic, dynamic> toJson() =>
@@ -53,9 +55,5 @@ class TeacherPassModel extends PassModel {
   @override
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.person);
-  }
-
-  String getType() {
-      return "TeacherPass";
   }
 }

@@ -129,15 +129,22 @@ class PassModel {
     }
   }
 
+  String nextActionByMe() {
+    if (!approved && canApprove) {
+      return "approve";
+    } else if (timeLeftOrigin == null && canSignOut) {
+      return "signout";
+    } else if (timeArrivedDestination == null && canSignIn) {
+      return "signin";
+    } else {
+      return null;
+    }
+  }
+
   List<String> getTimes() {
     List<String> times = [];
     if (timeLeftOrigin != null) times.add("Left Origin: " + MyDateTime.getTime(timeLeftOrigin));
     if (timeArrivedDestination != null) times.add("Arrived Destination: " + MyDateTime.getTime(timeArrivedDestination));
     return times;
   }
-
-  String getType() {
-    return type;
-  }
-  
 }
