@@ -129,4 +129,7 @@ class SRTPassModel extends PassModel {
     return times;
   }
 
+  String getType() {
+    return "SRTPass";
+  }
 }

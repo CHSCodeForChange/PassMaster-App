@@ -53,4 +53,8 @@ class LocationPassModel extends PassModel {
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.location_on);
   }
+
+  String getType() {
+      return "LocationPass";
+  }
 }
