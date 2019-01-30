@@ -55,11 +55,27 @@ class HomeState extends State<Home> {
 
     PassModel pass = await PassAPI().getData(user.token, pk, type, null);
 
-    if (pass.nextActionByMe() != null) {
-      await PassAPI().getData(user.token, pk, type, pass.nextActionByMe());
-      Messages.message("Success", context);
+    print(pass);
+
+    if (pass != null && pass.nextActionByMe() != null) {
+      if (pass.nextActionByMe() != null) {
+        await PassAPI().getData(user.token, pk, type, pass.nextActionByMe());
+        String message;
+
+        if (pass.nextActionByMe() == "approve") {
+          message = "Approved";
+        } else if (pass.nextActionByMe() == "signout") {
+          message = "Signed Out";
+        } else if (pass.nextActionByMe() == "signin") {
+          message = "Signed In";
+        }
+
+        Messages.message(message, context);
+      } else {
+        Messages.error("No Action Available", context);
+      }  
     } else {
-      Messages.error("Failed", context);
+      Messages.error("No Permissions", context);
     }
   }
 
