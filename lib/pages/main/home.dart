@@ -10,6 +10,7 @@ import '../../utilities/storage.dart';
 import '../../fragments/scanner.dart';
 import '../auth/login.dart';
 import 'package:qr_reader/qr_reader.dart';
+import '../../utilities/messages.dart';
 
 class Home extends StatefulWidget {
   CurrentUserModel user;
@@ -46,11 +47,15 @@ class HomeState extends State<Home> {
     }
   }
 
-  void scan() async {
+  void scan(BuildContext context) async {
     String code = await new QRCodeReader().scan();
     List<String> data = code.split(",");
-    PassAPI().getData(user.token, int.parse(data.elementAt(0)), data.elementAt(0), data.elementAt(0));
-
+    print(code);
+    if (PassAPI().getData(user.token, int.parse(data.elementAt(0)), data.elementAt(0), data.elementAt(0)) != null) {
+      Messages.message("Success", context);
+    } else {
+      Messages.error("Failed", context);
+    }
   }
 
   @override
@@ -81,7 +86,7 @@ class HomeState extends State<Home> {
             user.type == '2' ? IconButton(
               icon: Icon(Icons.camera),
               onPressed: () {
-                scan();
+                scan(context);
               },
             ) : new Container(),
 
