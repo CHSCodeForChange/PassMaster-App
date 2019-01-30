@@ -54,4 +54,8 @@ class TeacherPassModel extends PassModel {
   Icon getIcon({childIcon: false}) {
     return Icon(Icons.person);
   }
+
+  String getType() {
+      return "TeacherPass";
+  }
 }

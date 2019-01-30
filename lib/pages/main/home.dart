@@ -50,7 +50,7 @@ class HomeState extends State<Home> {
     String code = await new QRCodeReader().scan();
     List<String> data = code.split(",");
     PassAPI().getData(user.token, int.parse(data.elementAt(0)), data.elementAt(0), data.elementAt(0));
-
+    print(data);
   }
 
   @override

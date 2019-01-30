@@ -135,5 +135,9 @@ class PassModel {
     if (timeArrivedDestination != null) times.add("Arrived Destination: " + MyDateTime.getTime(timeArrivedDestination));
     return times;
   }
+
+  String getType() {
+    return type;
+  }
   
 }
