@@ -14,7 +14,6 @@ import '../../utilities/messages.dart';
 import '../../components/form/field.dart';
 import '../../components/ui/button.dart';
 
-
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,12 +34,10 @@ class LoginBody extends StatelessWidget {
   MyField username, password;
   bool loggingIn = false;
 
-
-  LoginBody () {
+  LoginBody() {
     username = MyField('username', false);
     password = MyField('password', true);
   }
-
 
   void login(BuildContext context) async {
     if (_formKey.currentState.validate() && !loggingIn) {
@@ -52,7 +49,8 @@ class LoginBody extends StatelessWidget {
         Messages.message("Logging in...", context);
         user = await LoginAPI().getData(username.value, password.value);
         Storage().storeUser(user);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Main(user)));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Main(user)));
         Messages.clear(context);
         _formKey.currentState.reset();
       } catch (e) {
@@ -61,70 +59,74 @@ class LoginBody extends StatelessWidget {
       loggingIn = false;
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.orangeAccent,
       statusBarColor: Colors.transparent,
     ));
-    return new Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Container(
-          child: new Text(
+    return new Container(
+      child: new ListView(
+        children: <Widget>[
+          new Container(
+            padding: EdgeInsets.only(top: 64.0),
+          ),
+          new Container(
+              child: new Text(
             'PassMaster',
-            style: TextStyle(color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.bold),
-          )
-        ),
-        new Container(
-          margin: EdgeInsets.all(20.0),
-          child: new Form(
-            key: _formKey,
-            child: new Column(
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          )),
+          new Container(
+              margin: EdgeInsets.all(20.0),
+              child: new Form(
+                key: _formKey,
+                child: new Column(
+                  children: <Widget>[
+                    new Container(
+                      margin: EdgeInsets.all(10.0),
+                      child: username,
+                    ),
+                    new Container(
+                      margin: EdgeInsets.all(10.0),
+                      child: password,
+                    ),
+                  ],
+                ),
+              )),
+          new Container(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: username,
-                ),
-                new Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: password,
-                ), 
+                    margin: EdgeInsets.all(5.0),
+                    child: MyButton('Log In', () {
+                      login(context);
+                    })),
+                // new Container(
+                //   margin: EdgeInsets.all(5.0),
+                //   child: new MyButton('Sign Up', () {
+                //     Navigator.pushReplacement(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => Signup()),
+                //     );
+                //   })
+                // ),
               ],
             ),
-          )
-        ),
-        new Container(
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                margin: EdgeInsets.all(5.0),
-                child: MyButton('Log In', () {
-                  login(context);
-                })
-              ),
-              // new Container(
-              //   margin: EdgeInsets.all(5.0),
-              //   child: new MyButton('Sign Up', () {
-              //     Navigator.pushReplacement(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => Signup()),
-              //     );  
-              //   })
-              // ),
-            ],
           ),
-        ),
-        new Container(
-          child: new Text(
+          new Container(
+              child: new Text(
             'Code For Change 2018',
             style: TextStyle(color: Colors.white),
-          )
-        )
-      ],
+            textAlign: TextAlign.center,
+          ))
+        ],
+      ),
     );
   }
 }
