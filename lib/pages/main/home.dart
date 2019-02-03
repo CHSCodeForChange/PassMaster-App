@@ -42,8 +42,13 @@ class HomeState extends State<Home> {
     });
     if(pass.state.pass != null) {
       pass.state.getPass();
+      setState(() {
+        hasPass = true;
+      });
     } else {
-      hasPass = false;
+      setState(() {
+        hasPass = false;
+      });
     }
   }
 
@@ -81,6 +86,7 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    print(hasPass);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: Color.fromARGB(255, 250, 250, 250),
       systemNavigationBarIconBrightness: Brightness.dark,
