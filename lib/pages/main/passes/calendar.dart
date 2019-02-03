@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_calendar/flutter_calendar.dart';
@@ -44,9 +45,15 @@ class MyCalendarState extends State<MyCalendar> {
   
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Color.fromARGB(255, 250, 250, 250),
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ));
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Calendar'),
+        backgroundColor: Colors.orangeAccent,
       ),
       body: new Column(
         children: <Widget>[
@@ -56,7 +63,7 @@ class MyCalendarState extends State<MyCalendar> {
           new Expanded(
             child: new Container(
               margin: EdgeInsets.only(top: 10.0),
-              color: Colors.blue,
+              color: Colors.orangeAccent,
               child: list
             ),
           )

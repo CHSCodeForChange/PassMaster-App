@@ -238,14 +238,13 @@ class PassState extends State<Pass> {
               ),
             ),
             new Divider(),
-            new Container(
-              alignment: Alignment.topLeft,
-              child: new Text(
+            new Expanded(
+              child: AutoSizeText(
                 this.pass.description,
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 20.0),
+	              style: TextStyle(fontSize: 20.0),
               ),
             ),
+
             actionButtons,
             history
           ],
