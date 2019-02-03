@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import './api.dart';
 import '../models/pass.dart';
 import '../models/srt-pass.dart';
+import '../models/special-srt-pass.dart';
 import '../models/location-pass.dart';
 import '../models/teacher-pass.dart';
 
@@ -42,6 +43,8 @@ class PassAPI extends API {
         pass = new SRTPassModel.fromJson(data);
       } else if (type == "LocationPass") {
         pass = new LocationPassModel.fromJson(data);
+      } else if (type == "SpecialSRTPass") {
+        pass = new SpecialSRTPassModel.fromJson(data);
       }
     } else {
       print("THIS WAS NOT A VALID TYPE");

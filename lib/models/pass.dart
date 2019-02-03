@@ -111,6 +111,9 @@ class PassModel {
     else if(type == "TeacherPass") {
       return new Icon(Icons.person);
     }
+    else if(type == "SpecialSRTPass") {
+      return new Icon(Icons.local_library);
+    }
     else {
       return Icon(Icons.error);
     }

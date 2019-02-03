@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import './api.dart';
 import '../models/srt-pass.dart';
+import '../models/special-srt-pass.dart';
 import '../models/location-pass.dart';
 import '../models/teacher-pass.dart';
 import '../models/pass.dart';
@@ -20,6 +21,8 @@ class CreatePassAPI extends API {
       data = (pass as TeacherPassModel).toJson();
     } else if (pass.type == "SRTPass") {
       data = (pass as SRTPassModel).toJson();
+    } else if (pass.type == "SpecialSRTPass") {
+      data = (pass as SpecialSRTPassModel).toJson();
     }
 
     url += pass.type;
@@ -38,6 +41,8 @@ class CreatePassAPI extends API {
       pass = TeacherPassModel.fromJson(json.decode(response.body));
     } else if (pass.type == "SRTPass") {
       pass = SRTPassModel.fromJson(json.decode(response.body));
+    } else if (pass.type == "SpecialSRTPass") {
+      pass = SpecialSRTPassModel.fromJson(json.decode(response.body));
     }
 
     return pass;

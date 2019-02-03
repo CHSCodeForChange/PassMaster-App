@@ -24,6 +24,8 @@ class PassListAPI extends API {
         "Authorization": token, 
       }
     );
+
+    print(response.body);
     
     List rawPasses = json.decode(response.body);
     Iterable<PassModel> passes = (rawPasses).map((i) => new PassModel.fromJson(i));
