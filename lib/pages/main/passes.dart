@@ -28,6 +28,11 @@ class Passes extends StatelessWidget {
         Tab(text: 'Pending'),
         Tab(text: 'Old'),
       ];
+    } else if (user.isLocation()) {
+      return [
+        Tab(text: 'Incoming'),
+        Tab(text: 'Old'),
+      ];
     }
     return null;
   }
@@ -35,16 +40,21 @@ class Passes extends StatelessWidget {
   List<Widget> getChildren() {
     if (user.isStudent()){
       return [
-              new ActivePasses(user),
-              new PendingPasses(user),
-              new OldPasses(user),
-            ];
+        new ActivePasses(user),
+        new PendingPasses(user),
+        new OldPasses(user),
+      ];
     } else if (user.isTeacher()) {
       return [
         new GenericPasses(user, 'teacher-incoming'),
         new GenericPasses(user, 'teacher-outgoing'),
         new GenericPasses(user, 'teacher-pending'),
         new GenericPasses(user, 'teacher-old'),
+      ];
+    } else if (user.isLocation()) {
+      return [
+        new GenericPasses(user, 'teacher-incoming'),
+        new GenericPasses(user, 'teacher-outgoing')
       ];
     }
     return null;

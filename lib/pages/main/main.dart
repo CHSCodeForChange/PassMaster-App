@@ -22,53 +22,39 @@ class MainState extends State<Main> {
   CurrentUserModel user;
   List pages;
   List<BottomNavigationBarItem> bar;
-  int index = 1;
+  int index = 0;
 
   MainState(user) {
     this.user = user;
-    if (user.isStudent()) {
-      pages = [
-        new Add(user),
-        new Home(user),
-        new Passes(user)
-      ];
-
-      bar = [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.add),
-              title: new Text('Add'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              title: Text('Passes')
-            )
-          ];
-    } else if (user.isTeacher()) {
-       pages = [
-        new Add(user),
-        new Home(user),
-        new Passes(user)
-      ];
-      
-      bar = [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.add),
-              title: new Text('Add'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              title: Text('Passes')
-            )
-          ];
+    pages = [];
+    bar = [];
+    if (user.isStudent() || user.isTeacher()) {
+      pages.add(Add(user));
+      bar.add(
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.add),
+          title: new Text('Add'),
+        )
+      );
+      index = 1;
     }
+    if (user.isStudent() || user.isTeacher() || user.isLocation()) {
+      pages.addAll([
+        new Home(user),
+        new Passes(user)
+      ]);
+
+      bar.addAll([
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text('Home'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.dashboard),
+          title: Text('Passes')
+        )
+      ]);
+    } 
   }
 
   void onTabTapped(int index) {
