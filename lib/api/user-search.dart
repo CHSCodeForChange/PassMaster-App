@@ -14,8 +14,14 @@ class UserListAPI extends API {
         url = this.baseUrl + 'students/?format=json';
       } else if (type == '2') {
         url = this.baseUrl + 'teachers/?format=json';
+      } else if (type == '3') {
+
+      } else if (type == '4') {
+        url = this.baseUrl + 'locations/?format=json';
       }
     }
+
+    print(url);
     
     if (username != null) {
       url += '&username=' + username;
@@ -27,6 +33,8 @@ class UserListAPI extends API {
         "Authorization": token, 
       }
     );
+
+    print(response.body);
 
     List rawPasses = json.decode(response.body);
     Iterable<UserModel> users = (rawPasses).map((i) => new UserModel.fromJson(i));

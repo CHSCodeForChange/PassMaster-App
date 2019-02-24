@@ -43,7 +43,7 @@ class LocationPassModel extends PassModel {
 
   @override 
   String getName(CurrentUserModel user) {
-    return user.type == '1' ? location : student.getName();
+    return user.isStudent() ? location : student.getName();
   }
 
   @override

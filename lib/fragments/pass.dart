@@ -137,7 +137,7 @@ class PassState extends State<Pass> {
       new AutoSizeText("Origin: " + (pass?.originTeacher?.getName() ?? ""), maxLines: 1, style: descriptorStyle)
     )],));
 
-    if (user.type == '2') {
+    if (user.isTeacher()) {
       descriptors.add(new Row(children: <Widget>[new Expanded(child: 
         new AutoSizeText("Destination: " + (pass?.getDestination() ?? ""), maxLines: 1, style: descriptorStyle)
       )],));
@@ -159,7 +159,7 @@ class PassState extends State<Pass> {
 
     Expanded actionButtons;
     // If the user is a teacher, show correct buttons
-    if (this.user.type == "2") {
+    if (this.user.isTeacher()) {
       if (pass.canApprove) {
         actionButtons = new Expanded(
           child: new Container(

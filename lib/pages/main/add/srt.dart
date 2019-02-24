@@ -42,7 +42,7 @@ class SRTPassFormState extends State<SRTPassForm> {
     originTeacher = new UserPicker(user, 'Origin Teacher', '2');
     destinationTeacher = new UserPicker(user, 'Destination Teacher', '2');
     
-    if (user.type == '2') { // create student field if the current user isn't a student
+    if (user.isTeacher()) { // create student field if the current user isn't a student
       student = new UserPicker(user, 'Student', '1');
     }
   }

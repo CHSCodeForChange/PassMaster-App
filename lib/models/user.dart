@@ -49,4 +49,20 @@ class UserModel {
   bool isSame(UserModel user) {
     return this.pk == user.pk;
   }
+
+  bool isStudent() {
+    return type == "1";
+  }
+
+  bool isTeacher() {
+    return type == "2";
+  }
+
+  bool isAdministrator() {
+    return type == "3";
+  }
+
+  bool isLocation() {
+    return type == "4";
+  }
 }

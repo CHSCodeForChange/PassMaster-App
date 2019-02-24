@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../models/teacher-pass.dart';
+import '../../../api/create.dart';
+
+import '../../../models/special-srt-pass.dart';
 import '../../../models/pass.dart';
 import '../../../models/currentuser.dart';
 
 import '../../../utilities/messages.dart';
 
 import '../../../components/form/date-picker.dart';
-import '../../../components/form/time-picker.dart';
+import '../../../components/ui/dropdown.dart';
 import '../../../components/form/user-picker.dart';
 import '../../../components/form/field2.dart';
-
-import '../../../api/create.dart';
 import '../passes/view-pass.dart';
 
-class TeacherPassForm extends StatefulWidget {
+
+class SpecialSRTPassForm extends StatefulWidget {
   CurrentUserModel user;
 
-  TeacherPassForm(this.user);
+  SpecialSRTPassForm(this.user);
 
   @override
-  TeacherPassFormState createState() => new TeacherPassFormState(user);
+  SpecialSRTPassFormState createState() => new SpecialSRTPassFormState(user);
 }
 
-class TeacherPassFormState extends State<TeacherPassForm> {
- 
-
+class SpecialSRTPassFormState extends State<SpecialSRTPassForm> {
   CurrentUserModel user;
 
   MyDatePicker date = new MyDatePicker("Date");
-  MyTimePicker startTime = new MyTimePicker("Start Time");
-  MyTimePicker endTime = new MyTimePicker("End Time");
+  Dropdown session = new Dropdown(["First Session", "Second Session", "Both Sessions"], values: ['1', '2', '3']);
   MyField2 description =  new MyField2("Description", 8);
 
   UserPicker originTeacher;
+  UserPicker initiatingTeacher;
   UserPicker destinationTeacher;
   UserPicker student; 
 
-  TeacherPassFormState(CurrentUserModel user) {
+  SpecialSRTPassFormState(CurrentUserModel user) {
     this.user = user;
 
     originTeacher = new UserPicker(user, 'Origin Teacher', '2');
-    destinationTeacher = new UserPicker(user, 'Destination Teacher', '2');
+    destinationTeacher = new UserPicker(user, 'Location', '4');
+    initiatingTeacher = new UserPicker(user, 'Initiating Teacher', '2');
     
     if (user.isTeacher()) { // create student field if the current user isn't a student
       student = new UserPicker(user, 'Student', '1');
@@ -50,18 +50,18 @@ class TeacherPassFormState extends State<TeacherPassForm> {
   }
 
   PassModel getData() {
-    return new TeacherPassModel(date.getValue(), startTime.getValue(), endTime.getValue(), student == null ? user : student.getValue(), originTeacher.getValue(), description.getValue(), destinationTeacher.getValue());
+    return new SpecialSRTPassModel(date.getValue(), student == null ? user : student.getValue(), originTeacher.getValue(), initiatingTeacher.getValue(), description.getValue(), destinationTeacher.getValue(), session.getValue());
   }
 
   @override
   Widget build(BuildContext context) {
-     List<Widget> widgets = [
+    List<Widget> widgets = [
       student != null ? student : new Container(),
       originTeacher, 
+      initiatingTeacher,
       destinationTeacher, 
       date,
-      startTime,
-      endTime,
+      session,
       description
     ];
 
@@ -93,11 +93,15 @@ class TeacherPassFormState extends State<TeacherPassForm> {
             child: new RaisedButton(
               onPressed: () async {
                 // give error if all fields aren't filled in
-                if ((student != null && student.isEmpty()) || originTeacher.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || description.isEmpty() || destinationTeacher.isEmpty()) {
+                if ((student != null && student.isEmpty()) || originTeacher.isEmpty() || date.isEmpty() || description.isEmpty() || destinationTeacher.isEmpty()) {
+                  print(originTeacher.getValue());
+                  print(date.getValue());
+                  print(description.getValue());
+                  print(destinationTeacher.getValue());
                   Messages.error("Must fill all fields", context);
                 } else {
                   // otherwise create an object
-                  TeacherPassModel pass = getData();
+                  SpecialSRTPassModel pass = getData();
                   pass = await CreatePassAPI().getData(user.token, pass);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => new ViewPass(user, pass)));
                 }

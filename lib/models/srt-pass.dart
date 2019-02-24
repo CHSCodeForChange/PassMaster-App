@@ -33,7 +33,7 @@ class SRTPassModel extends PassModel {
 
   @override 
   String getName(CurrentUserModel user) {
-    return user.type == '1' ? destinationTeacher.getName() : student.getName();
+    return user.isStudent() ? destinationTeacher.getName() : student.getName();
   }
 
   @override

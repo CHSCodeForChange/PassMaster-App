@@ -110,7 +110,7 @@ class HomeState extends State<Home> {
             ],
           ),
           actions: <Widget>[
-            user.type == '2' ? IconButton(
+            user.isTeacher() ? IconButton(
               icon: Icon(Icons.camera),
               onPressed: () {
                 scan(context);

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '../../components/ui/dropdown.dart';
 import './add/teacher.dart';
 import './add/srt.dart';
+import './add/special-srt.dart';
 import './add/location.dart';
 import '../../models/currentuser.dart';
 
@@ -40,6 +41,12 @@ class AddState extends State<Add> {
         return LocationPassForm(user);
       case 2: 
         return SRTPassForm(user);
+
+
+    }
+
+    if (value == 3 && user.isTeacher()) {
+      return SpecialSRTPassForm(user);
     }
     return null;
   }
@@ -62,7 +69,7 @@ class AddState extends State<Add> {
                 child: new Container(
                   padding: EdgeInsets.all(16.0),
                   child: new Dropdown(
-                    ["Teacher", "Location", "SRT"],
+                    user.isStudent() ? ["Teacher", "Location", "SRT"] : ["Teacher", "Location", "SRT", "Special SRT"],
                     function: function,
                   )
                 ),

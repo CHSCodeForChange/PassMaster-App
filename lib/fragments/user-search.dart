@@ -32,7 +32,12 @@ class UserSearchState extends State<UserSearch> {
     }
     else if(type == "2") {
       hintText = "Search Teachers";
+    } else if (type == "3") {
+      hintText = "Search Administrators";
+    } else if (type == "4") {
+      hintText = "Search Locations";
     }
+    
     getData(null);
   }
 

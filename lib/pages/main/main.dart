@@ -26,7 +26,7 @@ class MainState extends State<Main> {
 
   MainState(user) {
     this.user = user;
-    if (user.type == '1') {
+    if (user.isStudent()) {
       pages = [
         new Add(user),
         new Home(user),
@@ -47,7 +47,7 @@ class MainState extends State<Main> {
               title: Text('Passes')
             )
           ];
-    } else if (user.type == '2') {
+    } else if (user.isTeacher()) {
        pages = [
         new Add(user),
         new Home(user),

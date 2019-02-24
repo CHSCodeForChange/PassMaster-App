@@ -27,6 +27,8 @@ class CreatePassAPI extends API {
 
     url += pass.type;
 
+    print(url);
+
     var response = await http.post(
       Uri.encodeFull(url),
       body: data,

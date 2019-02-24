@@ -91,7 +91,7 @@ class PassModel {
   }
 
   String getName(CurrentUserModel user) {
-    return user.type == '1' ? destination : student.getName();
+    return user.isStudent() ? destination : student.getName();
   }
 
   String getDestination() {
