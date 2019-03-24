@@ -79,12 +79,12 @@ class Passes extends StatelessWidget {
             indicatorWeight: 3.0,
             tabs: getTabs(),
           ),
-          floatingActionButton: new FloatingActionButton(
-            child: new Icon(Icons.calendar_today),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => new MyCalendar(user)));
-            },
-          ),
+          // floatingActionButton: new FloatingActionButton(
+          //   child: new Icon(Icons.calendar_today),
+          //   onPressed: () {
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => new MyCalendar(user)));
+          //   },
+          // ),
           body: TabBarView(
             children: getChildren(),
           ),

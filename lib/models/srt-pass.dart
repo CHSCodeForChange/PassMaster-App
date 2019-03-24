@@ -112,10 +112,12 @@ class SRTPassModel extends PassModel {
       return "signout";
     } else if (timeArrivedDestination == null) {
       return "signin";
-    } else if (timeLeftDestination == null) {
+    } else if (session == '1') {
+      if (timeLeftDestination == null) {
       return "signout";
-    } else if (timeArrivedOrigin == null) {
-      return "signin";
+      } else if (timeArrivedOrigin == null) {
+        return "signin";
+      } 
     } else {
       return null;
     }
