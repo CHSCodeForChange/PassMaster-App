@@ -49,7 +49,7 @@ class PassListState extends State<PassList> {
     }
     return passes?.length==0 ?? false ? Center(child: Text('No passes in this list.', style: TextStyle(color: Colors.white, fontSize: 26.0),)) : new ListView.builder(
       padding: new EdgeInsets.all(8.0),
-      itemExtent: 100.0,
+      itemExtent: 120.0,
       itemCount: passes?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         return new GestureDetector(

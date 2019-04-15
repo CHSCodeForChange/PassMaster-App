@@ -39,7 +39,18 @@ class PassMini extends StatelessWidget {
 
             new Text(
               pass.getDateDuration(showYear: false, shortenedMonths: true),
-              style: TextStyle(fontSize: 17.0),
+              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w200),
+            ),
+
+            new Padding(
+              padding: EdgeInsets.only(top: 5.0),
+              child: new Text(
+                pass.description,
+                style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500, color: Colors.black),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+               
+              )
             )
           ],
         ),
