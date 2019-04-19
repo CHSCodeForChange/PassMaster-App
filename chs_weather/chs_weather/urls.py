@@ -16,6 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from rest_framework.authtoken import views as auth_views
+
+from server.api import *
+
+
 urlpatterns = [
+    path('rest/login/', auth_views.obtain_auth_token, name='login'),
+    path('rest/temp/<int:temp_id>/', TempView.as_view(), name='temp'),
+    path('rest/room/<int:room_id>/', RoomView.as_view(), name='room'),
+    path('rest/rooms/', RoomListView.as_view(), name='room-list'),
     path('admin/', admin.site.urls),
 ]

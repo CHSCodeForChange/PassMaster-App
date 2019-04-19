@@ -7,6 +7,12 @@ verify_ssl = true
 
 [packages]
 django = "*"
+djangorestframework = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+django-filters = "*"
+gunicorn = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
